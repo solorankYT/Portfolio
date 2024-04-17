@@ -10,6 +10,32 @@ html {
   scroll-behavior: smooth;
 }
 
+.skills-list {
+  list-style-type: none;
+  padding-left: 0;
+ 
+}
+
+.skills-list li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.feature-box {
+  border: 1px solid #eaeaea;
+  padding: 20px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.text-title {
+  font-size: 50px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
 body {
   font-family: "DM Sans", sans-serif;
   font-weight: normal;
