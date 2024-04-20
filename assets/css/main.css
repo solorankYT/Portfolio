@@ -1581,7 +1581,7 @@ ol {
     -webkit-box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.1);
             box-shadow: 0px 15px 20px 0px rgba(0, 0, 0, 0.1);
     padding: 10px 20px;
-    max-height: 350px;
+    max-height: 300px;
     overflow-y: scroll;
     border-top: 1px solid #000;
     border-radius: 8px;
@@ -1623,7 +1623,7 @@ ol {
     color: #3E80FF !important;
   }
   .header .navbar-nav .nav-item a {
-    color: #051441;
+    color: #074105;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -2135,6 +2135,7 @@ ol {
   background: linear-gradient(-45deg, #222831, #393E46,  #156a6e);
   padding: 250px 0 250px 0;
   z-index: 0;
+  height: 100vh;
 }
 
 .hero-area .hero-shape {
@@ -2302,7 +2303,7 @@ ol {
 }
 
 .h2-1{
-  width: 200px;
+  width: 300px;
   background: rgb(2,0,36);
   background: linear-gradient(185deg, rgba(2,0,36,1) 0%, rgba(9,121,35,1) 35%, rgba(59,0,255,1) 98%);
   border-radius: 50%;
