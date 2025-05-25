@@ -3,23 +3,30 @@
 
 @custom-variant dark (&:is(.dark *));
 
+.background{
+background-color: #1a202c;
+opacity: 1;
+background-image: radial-gradient(#748c1c 1.6px, #1a202c 1.6px);
+background-size: 32px 32px; 
+}
+
 @keyframes scroll {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scroll-reverse {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
 }
 
 .animate-scroll {
-  animation: scroll 20s linear infinite;
+  animation: scroll  linear infinite;
 }
-
-
 .animate-scroll-reverse {
-  animation: scroll 20s linear infinite reverse;
+  animation: scroll-reverse  linear infinite;
 }
+
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
