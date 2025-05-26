@@ -1,7 +1,8 @@
 import SkillsCarousel from "./components/skillsCarousel";
 import Projects from "./components/projects";
 import { CiLocationOn } from "react-icons/ci";
-import { FaGithub } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+import { CgMail } from "react-icons/cg";
 
 export default function Home() {
   return (
@@ -26,9 +27,26 @@ export default function Home() {
             <div className="mt-4 button text-white hover:text-yellow-400"><span>Download CV </span></div>
             </a> 
 
-            <ul>
+            <ul className="flex space-x-4 mt-6 text-gray-500 text-2xl">
               <li>
-             <a href="https://github.com/solorankYT"> <FaGithub /> </a>
+             <a href="https://github.com/solorankYT"> 
+              <div className="hover:text-yellow-400"> <FaGithub />  </div> 
+             </a>
+              </li>
+                <li>
+             <a href="https://www.facebook.com/MarkKingGT/"> 
+              <div className="hover:text-yellow-400"> <FaFacebook />  </div> 
+             </a>
+              </li>
+                <li>
+             <a href="https://github.com/solorankYT"> 
+              <div className="hover:text-yellow-400"> <FaLinkedin />  </div> 
+             </a>
+              </li>
+             <li>
+             <a href="https://www.linkedin.com/in/markfuna/"> 
+              <div className="hover:text-yellow-400"> <CgMail />  </div> 
+             </a>
               </li>
             </ul>
             
