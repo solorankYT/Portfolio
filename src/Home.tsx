@@ -3,6 +3,7 @@ import Projects from "./components/projects";
 import { CiLocationOn } from "react-icons/ci";
 import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
 import { CgMail } from "react-icons/cg";
+import GitHubContribution from "./components/githubContribution";
 
 export default function Home() {
   return (
@@ -58,6 +59,10 @@ export default function Home() {
     
           <section id="projects" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
             <Projects />
+          </section>
+
+          <section className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
+            <GitHubContribution />
           </section>
     
           <footer className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
