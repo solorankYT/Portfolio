@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 export default function About() {
   return (
     <main className="bg-gray-900 dark:bg-gray-950 min-h-screen flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8">
-      <Card className="max-w-3xl w-full p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg flex flex-col items-center text-center">
+      <Card className="max-w-3xl w-full p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg flex flex-col items-center text-center my-8">
         <img
           src="./2x2.jpg"
           alt="Profile"
@@ -13,21 +13,50 @@ export default function About() {
         <h1 className="text-gray-400 mb-4 text-2xl">
           <span className="text-yellow-400">Frontend</span> Developer
         </h1>
-        <p className="text-gray-400 text-lg leading-relaxed max-w-prose">
-          I build responsive and maintainable web applications using modern tools and frameworks.
-          I enjoy working with others and contribute effectively to team goals.
-          <br />
-          <br />
-          My experience includes delivering projects that meet both technical and user needs.
-          I’m always learning and exploring better ways to solve problems through code.
-          <br />
-          <br />
-          I’m open to new opportunities and enjoy connecting with others in the tech community.
-          <br />
-          <br />
-          Outside of work, I like reading about tech and playing video games.
-        </p>
+
+        <div className="text-gray-400 text-lg leading-relaxed max-w-prose space-y-4">
+          <p>
+            Hi, I'm <strong>Mark Funa</strong> — a recent Information Technology graduate excited to start my career as a <strong>Front-End Developer</strong>.
+          </p>
+
+          <p>
+            I recently completed a 6-month internship as a Full Stack Developer, where I built real-world web applications using <strong>React</strong>, <strong>Next.js</strong>, <strong>Node.js</strong>, <strong>Firebase</strong>, and <strong>MySQL</strong>.
+          </p>
+
+          <p>
+            I'm looking to join a team where I can contribute, grow, and help create products that make a difference.
+          </p>
+
+          <p>
+            Outside of coding, I enjoy reading about tech and playing video games. I'm also open to connecting with others in the developer community.
+          </p>
+        </div>
+
+        <div className="mt-8 w-full text-left">
+          <h2 className="text-yellow-400 text-xl font-semibold mb-4">Technical Skills</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300 text-base">
+            <div>
+              <h3 className="text-gray-200 font-medium mb-2">Frontend</h3>
+              <ul className="list-disc list-inside space-y-1">
+                <li>React</li>
+                <li>Next.js</li>
+                <li>TypeScript</li>
+                <li>JavaScript</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-gray-200 font-medium mb-2">Backend</h3>
+              <ul className="list-disc list-inside space-y-1">
+                <li>Node.js</li>
+                <li>PHP</li>
+                <li>Laravel</li>
+                <li>MySQL</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </Card>
+
 
       <section className="max-w-3xl w-full mt-16 space-y-4">
         <h1 className="text-3xl text-gray-100">Work Experience</h1>

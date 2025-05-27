@@ -1,20 +1,13 @@
 import {
-  FaReact, FaNodeJs, FaGitAlt, FaVuejs, FaJs, FaHtml5, FaCss3
+ FaJs, FaHtml5,
 } from "react-icons/fa";
+
 import {
-  RiFirebaseFill,
-  RiFirebaseLine,
-  RiTailwindCssLine
-} from "react-icons/ri";
-import {
-  SiAwslambda,
   SiCss3,
-  SiFigma, SiFirebase, SiGit, SiLaravel, SiMysql, SiNetlify, SiNextdotjs, SiNodedotjs, SiPhp, SiPostgresql,
-  SiPostman, SiReact, SiShadcnui, SiTailwindcss, SiTypescript,
-  SiVercel,
+ SiFirebase,  SiLaravel, SiMysql,  SiNextdotjs, SiNodedotjs, SiPhp, SiPostgresql, SiReact, SiTypescript,
   SiVuedotjs
 } from "react-icons/si";
-import { TbBrandVisualStudio } from "react-icons/tb";
+
 
 const frontendSkills = [
 { icon: <FaJs />, name: "JavaScript" },
@@ -35,17 +28,28 @@ const backendSkills = [
 { icon: <SiPhp />, name: "PHP" },
 ];
 
-const tools = [
-{ icon: <SiGit />, name: "Git" },
-{ icon: <SiPostman />, name: "Postman" },
-{ icon: <SiFigma />, name: "Figma" },
-{ icon: <SiVercel />, name: "Vercel" },
-{ icon: <SiNetlify />, name: "Netlify" },
-{ icon: <TbBrandVisualStudio />, name: "Visual Studio Code" },
-{ icon: <SiAwslambda />, name: "AWS Lambda" },
-];
+// const tools = [
+// { icon: <SiGit />, name: "Git" },
+// { icon: <SiPostman />, name: "Postman" },
+// { icon: <SiFigma />, name: "Figma" },
+// { icon: <SiVercel />, name: "Vercel" },
+// { icon: <SiNetlify />, name: "Netlify" },
+// { icon: <TbBrandVisualStudio />, name: "Visual Studio Code" },
+// { icon: <SiAwslambda />, name: "AWS Lambda" },
+// ];
 
-const Section = ({ skills, reverse = false, white = false}) => (
+type Skill = {
+  icon: React.ReactNode;
+  name: string;
+};
+
+type SectionProps = {
+  skills: Skill[];
+  reverse?: boolean;
+  white?: boolean;
+};
+
+const Section: React.FC<SectionProps> = ({ skills, reverse = false, white = false }) => (
   <div className="overflow-hidden whitespace-nowrap">
     <div
       className={`inline-flex ${reverse ? "animate-scroll-reverse" : "animate-scroll"}`}
@@ -69,7 +73,7 @@ export default function SkillsCarousel() {
     <div className="container">
       <Section skills={frontendSkills} />
       <Section skills={backendSkills} reverse white/>
-      <Section skills={tools} />
+   
     </div>
   );
 }

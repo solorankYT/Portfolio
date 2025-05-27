@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ActivityCalendar } from 'react-activity-calendar';
 import type { ThemeInput } from 'react-activity-calendar';
 
@@ -9,8 +9,7 @@ interface Contribution {
 }
 
 const greenTheme: ThemeInput = {
-  light: ['#000033', '#a8d5a2', '#70b958', '#439632', '#255b12'],
-  dark: ['#ebf4ea', '#a8d5a2', '#70b958', '#439632', '#255b12'],
+  light: ['#000033', '#f6e05e', '#ecc94b', '#d69e2e', '#b7791f'],
 };
 
 export default function SolorankContributions() {
@@ -27,9 +26,22 @@ export default function SolorankContributions() {
         if (!response.ok) throw new Error('Failed to fetch');
         const json = await response.json();
 
-        const contributions2025 = json.contributions
-          .filter((day: any) => day.date.startsWith('2025-'))
-          .map((day: any) => ({
+        const contributions2025 = (json.contributions as unknown[])
+          .filter(
+            (day: unknown): day is { date: string; count: number; level: number } =>
+              typeof day === 'object' &&
+              day !== null &&
+              'date' in day &&
+              typeof (day as Record<string, unknown>).date === 'string' &&
+              'count' in day &&
+              typeof (day as Record<string, unknown>).count === 'number' &&
+              'level' in day &&
+              typeof (day as Record<string, unknown>).level === 'number' &&
+              typeof (day as Record<string, unknown>).date === 'string' &&
+              typeof (day as Record<string, unknown>).date === 'string' &&
+              ((day as Record<string, unknown>).date as string).startsWith('2025-')
+          )
+          .map((day) => ({
             date: day.date,
             count: day.count,
             level: day.level,
@@ -52,7 +64,7 @@ export default function SolorankContributions() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-yellow-400 mb-6">Github Contributions</h1>
+     
       <div className="text-gray-400 bg-gray-900 p-6 rounded-lg shadow-lg">
         <ActivityCalendar data={data} theme={greenTheme} />
       </div>

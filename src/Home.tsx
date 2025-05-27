@@ -18,7 +18,7 @@ export default function Home() {
             </h3>
           
             <p className="text-gray-400 text-lg leading-relaxed">
-              <span className="text-yellow-400">Front-end Developer</span> with experience building e-commerce platforms and dashboards using React and TypeScript. 
+              <span className="text-yellow-400">Front-end Developer</span> with experience building e-commerce platforms and dashboards using <span className="text-yellow-400">React and TypeScript</span>. 
               <span className="text-gray-300"> I focus on writing clean, maintainable code and following best practices</span>. 
               I enjoy working with others to build thoughtful, practical solutions.
             </p>
@@ -28,7 +28,7 @@ export default function Home() {
             <div className="mt-4 button text-white hover:text-yellow-400"><span>Download CV </span></div>
             </a> 
 
-            <ul className="flex space-x-4 mt-6 text-gray-500 text-2xl">
+            <ul className="flex space-x-4 mt-6 text-gray-500 text-2xl ">
               <li>
              <a href="https://github.com/solorankYT"> 
               <div className="hover:text-yellow-400"> <FaGithub />  </div> 
@@ -54,14 +54,17 @@ export default function Home() {
           </main>
     
           <section  className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Technical Skills</h2>
             <SkillsCarousel />
             </section>
     
           <section id="projects" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Personal Projects</h2>
             <Projects />
           </section>
 
           <section className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
+             <h1 className="text-2xl font-bold text-gray-200 mb-6 text-center">Github Contributions</h1>
             <GitHubContribution />
           </section>
     

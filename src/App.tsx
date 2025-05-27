@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/navBar";
 import Home from "./Home";
 import About from "./About";
-import CursorLight from "./components/cursorLight";
+import ProjectPage from "./ProjectPage";
 
 export default function App() {
   return (
@@ -14,6 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/projectpage" element={<ProjectPage />} />
         </Routes>
       </main>
       
