@@ -1,4 +1,5 @@
 import  { useState } from "react";
+import { Link } from "react-router-dom";
 
 
 export default function NavBar() {
@@ -7,15 +8,15 @@ export default function NavBar() {
   return (
     <nav className="bg-gray-900 fixed w-full z-20 top-0 left-0 shadow-md">
       <div className="max-w-screen-xl mx-auto flex items-center p-4 relative">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
           aria-label="Mark Funa Homepage"
         >
           <span className="self-center text-2xl font-semibold text-white">
             Mark Funa
           </span>
-        </a>
+        </Link>
 
         <div className="flex-grow flex justify-center">
           <div
@@ -26,29 +27,29 @@ export default function NavBar() {
           >
             <ul className="flex flex-col md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium bg-gray-900 md:bg-transparent rounded-lg md:rounded-none p-4 md:p-0 justify-center">
               <li>
-                <a
-                  href="/"
+                <Link
+                  to="/"
                   className="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-yellow-500"
                   aria-current="page"
                 >
                   Home
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/About"
+                <Link
+                  to="/about"
                   className="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-yellow-500"
                 >
                   About
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href="/ProjectPage"
+                <Link
+                  to="/projectpage"
                   className="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-yellow-500"
                 >
                   Projects
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
