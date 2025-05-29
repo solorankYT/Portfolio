@@ -27,6 +27,14 @@ background-size: 32px 32px;
   animation: scroll-reverse  linear infinite;
 }
 
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+.animate-scroll-reverse:hover {
+  animation-play-state: paused;
+}
+
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

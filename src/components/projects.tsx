@@ -11,7 +11,7 @@ export default function Projects() {
   },
   {
     title: "Ulam Generator",
-    image: "./ulamgen.png",
+    image: "./ulambox.png",
     description:
       "Ulam Generator is an innovative web app that dynamically creates personalized dish recommendations based on user-selected categories. Built with Next.js API routes, Firebase backend, and styled using Shadcn UI components, it offers fast, scalable, and visually engaging performance.",
     techstack: ["Next.js API route", "Firebase", "Shadcn"],
@@ -31,7 +31,6 @@ export default function Projects() {
     return (
         <div>
             {projects.map((project, index) => (
-                
                 <div key={index}
                 className="bg-gray-900 border border-gray-700 rounded-xl shadow-lg p-4 mb-4 "
                 >

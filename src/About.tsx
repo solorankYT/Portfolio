@@ -1,8 +1,18 @@
 import { Card } from "@/components/ui/card";
+import ScrollSection from "./components/ScrollSection";
+
+
+const stack = [
+  "Laravel",
+  "Vue",
+  "PostgreSQL",
+
+];
 
 export default function About() {
   return (
     <main className="bg-gray-900 dark:bg-gray-950 min-h-screen flex flex-col items-center py-16 px-4 sm:px-6 lg:px-8">
+      <ScrollSection>
       <Card className="max-w-3xl w-full p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg flex flex-col items-center text-center my-8">
         <img
           src="./2x2.jpg"
@@ -56,16 +66,24 @@ export default function About() {
           </div>
         </div>
       </Card>
+      </ScrollSection>
 
-
+    <ScrollSection>
       <section className="max-w-3xl w-full mt-16 space-y-4">
         <h1 className="text-3xl text-gray-100">Work Experience</h1>
 
         <article className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow">
-          <h1 className="text-2xl text-yellow-400">Full Stack Developer Intern</h1>
+          <h1 className="text-2xl  text-gray-200 font-bold">Full Stack Developer Intern</h1>
           <p className="italic text-gray-400 mb-2">
             Information Technology Development Center | September 2024 – December 2024
           </p>
+
+          {stack.map((item, index) => (
+            <div key={index} className="inline-block bg-gray-700 text-yellow-500 text-sm font-semibold mr-2 px-2.5 py-0.5 rounded mb-2">
+              {item}
+            </div>
+          ))}
+            
           <ul className="list-disc list-inside text-gray-300 space-y-2">
             <li>Developed a student portal and admin dashboard for course enrollment and record tracking.</li>
             <li>Created RESTful APIs with input validation to ensure secure and accurate data handling.</li>
@@ -74,7 +92,9 @@ export default function About() {
           </ul>
         </article>
       </section>
+      </ScrollSection>
 
+      <ScrollSection>
       <section className="max-w-3xl w-full mt-16 space-y-4">
         <h1 className="text-3xl text-gray-100">Education</h1>
         <article className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow">
@@ -86,6 +106,7 @@ export default function About() {
           </p>
         </article>
       </section>
+      </ScrollSection>
     </main>
   );
 }
