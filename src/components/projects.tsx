@@ -25,6 +25,15 @@ export default function Projects() {
     techstack: ["React", "Tailwind CSS"],
     link: "https://valoplay.netlify.app/",
   },
+  {
+    title: "Taskora",
+    image: "./taskmanagement.png",
+    description:
+      "Taskora is a Jira-inspired task management platform enhanced with a built-in Pomodoro timer to boost productivity. Built with Laravel 12 and React Inertia, it leverages ShadCN for a sleek UI and MySQL for reliable data storage, offering a seamless balance of task organization and time management.",
+    techstack: ["Laravel 12", "React Inertia", "ShadCN", "MySQL"],
+    link: "https://your-deployment-link.com/",
+  },
+
 ];
 
 
