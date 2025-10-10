@@ -9,6 +9,7 @@ import ScrollSection from "./components/ScrollSection";
 export default function Home() {
   return (
     <div className="bg-gray-900 dark:bg-gray-950 min-h-screen flex flex-col">
+      <div></div>
       <ScrollSection>
           <main className="container max-w-3xl mx-auto mt-20 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg border-b-0">
             <h1 className="text-4xl font-extrabold text-white mb-3">
