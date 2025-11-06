@@ -38,11 +38,6 @@ export default function Home() {
              </a>
               </li>
                 <li>
-             <a href="https://www.facebook.com/MarkKingGT/"> 
-              <div className="hover:text-yellow-400"> <FaFacebook />  </div> 
-             </a>
-              </li>
-                <li>
              <a href="https://www.linkedin.com/in/markfuna/"> 
               <div className="hover:text-yellow-400"> <FaLinkedin />  </div> 
              </a>
@@ -64,7 +59,7 @@ export default function Home() {
         </ScrollSection>
 
        <ScrollSection>
-          <section className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
+          <section id="projects" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
             <h2 className="text-2xl font-bold text-white mb-6 text-center">Personal Projects</h2>
             <Projects />
           </section>

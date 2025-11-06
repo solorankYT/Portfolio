@@ -44,12 +44,12 @@ export default function NavBar() {
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/projectpage"
+                <a
+                  href="/#projects"
                   className="block py-2 px-3 text-white rounded hover:bg-gray-700 md:hover:bg-transparent md:hover:text-yellow-500"
                 >
                   Projects
-                </Link>
+                </a>
               </li>
             </ul>
           </div>

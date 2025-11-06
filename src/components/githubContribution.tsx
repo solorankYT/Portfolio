@@ -9,8 +9,10 @@ interface Contribution {
 }
 
 const greenTheme: ThemeInput = {
-  light: ['#000033', '#f6e05e', '#ecc94b', '#d69e2e', '#b7791f'],
+  light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
+  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
 };
+
 
 export default function SolorankContributions() {
   const [data, setData] = useState<Contribution[]>([]);
@@ -65,7 +67,7 @@ export default function SolorankContributions() {
   return (
     <div>
      
-      <div className="text-gray-400 bg-gray-900 p-6 rounded-lg shadow-lg">
+      <div className="text-gray-100 bg-gray-900 p-6 rounded-lg shadow-lg">
         <ActivityCalendar data={data} theme={greenTheme} />
       </div>
     </div>
