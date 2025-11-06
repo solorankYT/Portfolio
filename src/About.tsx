@@ -6,8 +6,7 @@ const stack = ["Laravel", "Vue", "PostgreSQL"];
 export default function About() {
   return (
     <main className="bg-gradient-to-b from-gray-900 via-gray-950 to-black text-gray-200 min-h-screen flex flex-col items-center py-20 px-4 sm:px-6 lg:px-8 space-y-20">
-      
-      {/* ===== Profile & About Section ===== */}
+
       <ScrollSection>
         <Card className="relative max-w-3xl w-full p-10 bg-gray-800/70 backdrop-blur-sm border border-gray-700 hover:border-yellow-400/40 transition-all rounded-2xl shadow-lg flex flex-col items-center text-center">
           <img

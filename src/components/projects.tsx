@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, type JSX } from "react";
 import { FaReact, FaNodeJs, FaDatabase } from "react-icons/fa";
 import {
   SiNextdotjs,
@@ -14,9 +14,19 @@ import {
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 
+ type Project = {
+  title: string;
+  image: string;
+  description: string;
+  techstack: string[];
+  link: string;
+};
+
 export default function Projects() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
+ 
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
@@ -24,20 +34,21 @@ export default function Projects() {
     return () => window.removeEventListener("keydown", handleEsc);
   }, []);
 
-  const techstackIcon = {
-    React: <FaReact className="text-cyan-400 text-2xl" />,
-    "Node.js": <FaNodeJs className="text-green-500 text-2xl" />,
-    MySQL: <SiMysql className="text-blue-400 text-2xl" />,
-    "Next.js API route": <SiNextdotjs className="text-white text-2xl" />,
-    Firebase: <SiFirebase className="text-yellow-400 text-2xl" />,
-    Shadcn: <SiShadcnui className="text-purple-400 text-2xl" />,
-    "Tailwind CSS": <SiTailwindcss className="text-sky-400 text-2xl" />,
-    "Laravel 12": <SiLaravel className="text-red-500 text-2xl" />,
-    API: <FaDatabase className="text-gray-400 text-2xl" />,
-    PgSQL: <SiPostgresql className="text-indigo-400 text-2xl" />,
-    Express: <SiExpress className="text-yellow-400 text-2xl" />,
-    Openai: <SiOpenai className="text-gray-400 text-2xl" />,
-  };
+const techstackIcon: Record<string, JSX.Element> = {
+  React: <FaReact className="text-cyan-400 text-2xl" />,
+  "Node.js": <FaNodeJs className="text-green-500 text-2xl" />,
+  MySQL: <SiMysql className="text-blue-400 text-2xl" />,
+  "Next.js API route": <SiNextdotjs className="text-white text-2xl" />,
+  Firebase: <SiFirebase className="text-yellow-400 text-2xl" />,
+  Shadcn: <SiShadcnui className="text-purple-400 text-2xl" />,
+  "Tailwind CSS": <SiTailwindcss className="text-sky-400 text-2xl" />,
+  "Laravel 12": <SiLaravel className="text-red-500 text-2xl" />,
+  API: <FaDatabase className="text-gray-400 text-2xl" />,
+  PgSQL: <SiPostgresql className="text-indigo-400 text-2xl" />,
+  Express: <SiExpress className="text-yellow-400 text-2xl" />,
+  Openai: <SiOpenai className="text-gray-400 text-2xl" />,
+};
+
 
   const projects = [
     {

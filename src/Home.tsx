@@ -1,7 +1,7 @@
 import SkillsCarousel from "./components/skillsCarousel";
 import Projects from "./components/projects";
 import { CiLocationOn } from "react-icons/ci";
-import { FaFacebook, FaGithub, FaLinkedin } from "react-icons/fa";
+import {FaGithub, FaLinkedin } from "react-icons/fa";
 import { CgMail } from "react-icons/cg";
 import GitHubContribution from "./components/githubContribution";
 import ScrollSection from "./components/ScrollSection";
