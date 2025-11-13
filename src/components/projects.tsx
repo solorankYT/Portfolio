@@ -10,6 +10,10 @@ import {
   SiPostgresql,
   SiExpress,
   SiOpenai,
+  SiVercel,
+  SiHeroku,
+  SiNetlify,
+  SiInertia,
 } from "react-icons/si";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -47,35 +51,40 @@ const techstackIcon: Record<string, JSX.Element> = {
   PgSQL: <SiPostgresql className="text-indigo-400 text-2xl" />,
   Express: <SiExpress className="text-yellow-400 text-2xl" />,
   Openai: <SiOpenai className="text-gray-400 text-2xl" />,
+  Vercel: <SiVercel className="text-gray-300 bg-gray-800 rounded-lg p-1 text-2xl"/>,
+  Heroku: <SiHeroku className="text-purple-400 text-2xl"/>,
+  Netlify: <SiNetlify className="text-green-500 text-2xl" />,
+  Inertia: <SiInertia className="text-white text-2xl"/>
 };
 
 
   const projects = [
-    {
-      title: "Focusly",
-      image: "./taskmanagement.png",
-      description:
-        "Focusly is a Jira-inspired task management platform enhanced with a built-in Pomodoro timer. Built with Laravel 12 and React Inertia, it uses Shadcn UI and MySQL for a clean, efficient workflow.",
-      techstack: ["Laravel 12", "React", "MySQL", "Shadcn", "Openai"],
-      link: "#",
-    },
-    {
-      title: "Unitrack",
-      image: "./unitrack.png",
-      description:
-        "Unitrack is a full-stack React and Node.js order tracking system powered by MySQL. It delivers real-time updates and a seamless experience across devices.",
-      techstack: ["React", "Node.js", "MySQL", "Express", "Tailwind CSS"],
-      link: "https://unitrack.shop/",
-    },
-    {
-      title: "Ulam Generator",
-      image: "./ulambox.png",
-      description:
-        "Ulam Generator is a Next.js-based web app that creates personalized dish recommendations using Firebase and Shadcn UI components for a smooth, fast experience.",
-      techstack: ["Next.js API route", "Firebase", "Shadcn"],
-      link: "https://ulamgenerator.vercel.app/",
-    },
-  ];
+  {
+    title: "Focusly",
+    image: "./taskmanagement.png",
+    description:
+      "Focusly is an AI-powered productivity app that transforms user input into structured Kanban boards with prioritized tasks and deadlines. Built with Laravel 12 and React Inertia.js, it features a Pomodoro-based focus mode, real-time analytics, and GPT-4–powered coaching insights for enhanced productivity.",
+    techstack: ["Laravel 12", "React", "Inertia" , "MySQL", "Shadcn", "Openai"],
+    link: "#",
+  },
+  {
+    title: "Unitrack",
+    image: "./unitrack.png",
+    description:
+      "Unitrack is a full-stack e-commerce and order management system featuring dynamic product listings, secure JWT authentication, and a multi-step checkout flow. It includes an admin dashboard with real-time stock tracking, order fulfillment, and role-based access control for efficient inventory management.",
+    techstack: ["React", "Node.js", "Express", "MySQL", "Tailwind CSS", "Netlify", "Heroku", "API"],
+    link: "https://unitrack.shop/",
+  },
+  {
+    title: "Ulam Generator",
+    image: "./ulambox.png",
+    description:
+      "Ulam Generator is a Next.js web app that recommends personalized dishes based on user preferences. It integrates Firebase for real-time data management and uses Shadcn UI for a sleek, fast, and modern experience.",
+    techstack: ["Next.js API route", "Firebase", "Shadcn", "Vercel"],
+    link: "https://ulamgenerator.vercel.app/",
+  },
+];
+
 
   return (
     <div className="space-y-8">
