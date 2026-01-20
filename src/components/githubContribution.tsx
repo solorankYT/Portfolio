@@ -28,7 +28,7 @@ export default function SolorankContributions() {
         if (!response.ok) throw new Error('Failed to fetch');
         const json = await response.json();
 
-        const contributions2025 = (json.contributions as unknown[])
+        const contributions2026 = (json.contributions as unknown[])
           .filter(
             (day: unknown): day is { date: string; count: number; level: number } =>
               typeof day === 'object' &&
@@ -41,7 +41,7 @@ export default function SolorankContributions() {
               typeof (day as Record<string, unknown>).level === 'number' &&
               typeof (day as Record<string, unknown>).date === 'string' &&
               typeof (day as Record<string, unknown>).date === 'string' &&
-              ((day as Record<string, unknown>).date as string).startsWith('2025-')
+              ((day as Record<string, unknown>).date as string).startsWith('2026-')
           )
           .map((day) => ({
             date: day.date,
@@ -49,7 +49,7 @@ export default function SolorankContributions() {
             level: day.level,
           }));
 
-        setData(contributions2025);
+        setData(contributions2026);
       } catch (e) {
         setError('Failed to load contributions');
         console.error(e);
