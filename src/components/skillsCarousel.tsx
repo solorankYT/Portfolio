@@ -1,79 +1,114 @@
 import {
- FaJs, FaHtml5,
+  FaJs,
+  FaHtml5,
 } from "react-icons/fa";
 
 import {
   SiCss3,
- SiFirebase,  SiLaravel, SiMysql,  SiNextdotjs, SiNodedotjs, SiPhp, SiPostgresql, SiReact, SiTypescript,
-  SiVuedotjs
+  SiFirebase,
+  SiLaravel,
+  SiMysql,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiPhp,
+  SiPostgresql,
+  SiReact,
+  SiTypescript,
+  SiVuedotjs,
 } from "react-icons/si";
 
-
-const frontendSkills = [
-{ icon: <FaJs />, name: "JavaScript" },
-{ icon: <SiTypescript />, name: "TypeScript" },
-{ icon: <FaHtml5 />, name: "HTML" },
-{ icon: <SiCss3 />, name: "CSS" },
-{ icon: <SiReact />, name: "React" },
-{ icon: <SiVuedotjs />, name: "Vue.js" },
-{ icon: <SiNextdotjs />, name: "Next.js" },
-];
-
-const backendSkills = [
-{ icon: <SiNodedotjs />, name: "Node.js" },
-{ icon: <SiFirebase />, name: "Firebase" },
-{ icon: <SiMysql />, name: "MySQL" },
-{ icon: <SiLaravel />, name: "Laravel" },
-{ icon: <SiPostgresql />, name: "PostgreSQL" },
-{ icon: <SiPhp />, name: "PHP" },
-];
-
-// const tools = [
-// { icon: <SiGit />, name: "Git" },
-// { icon: <SiPostman />, name: "Postman" },
-// { icon: <SiFigma />, name: "Figma" },
-// { icon: <SiVercel />, name: "Vercel" },
-// { icon: <SiNetlify />, name: "Netlify" },
-// { icon: <TbBrandVisualStudio />, name: "Visual Studio Code" },
-// { icon: <SiAwslambda />, name: "AWS Lambda" },
-// ];
+import { motion } from "framer-motion";
 
 type Skill = {
   icon: React.ReactNode;
   name: string;
+  color: string;
+  glow: string;
 };
 
-type SectionProps = {
-  skills: Skill[];
-  reverse?: boolean;
-  white?: boolean;
+const frontendSkills: Skill[] = [
+  { icon: <FaJs />, name: "JavaScript", color: "text-yellow-400", glow: "hover:shadow-yellow-500/40" },
+  { icon: <SiTypescript />, name: "TypeScript", color: "text-blue-500", glow: "hover:shadow-blue-500/40" },
+  { icon: <SiReact />, name: "React", color: "text-cyan-400", glow: "hover:shadow-cyan-400/40" },
+  { icon: <SiNextdotjs />, name: "Next.js", color: "text-gray-300", glow: "hover:shadow-gray-300/40" },
+];
+
+const backendSkills: Skill[] = [
+  { icon: <SiNodedotjs />, name: "Node.js", color: "text-green-600", glow: "hover:shadow-green-600/40" },
+  { icon: <SiMysql />, name: "MySQL", color: "text-blue-600", glow: "hover:shadow-blue-600/40" },
+  { icon: <SiLaravel />, name: "Laravel", color: "text-red-500", glow: "hover:shadow-red-500/40" },
+  { icon: <SiPostgresql />, name: "PostgreSQL", color: "text-blue-700", glow: "hover:shadow-blue-700/40" },
+
+];
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
 };
 
-const Section: React.FC<SectionProps> = ({ skills, reverse = false, white = false }) => (
-  <div className="overflow-hidden whitespace-nowrap">
-    <div
-      className={`inline-flex ${reverse ? "animate-scroll-reverse" : "animate-scroll"}`}
-      style={{ animationDuration: "25s" }}
-    >
-      {skills.concat(skills).map((skill, index) => (
-        <div
-          key={index}
-          className={`flex flex-col items-center justify-center mx-6 text-4xl ${white ? "text-gray-400" : "text-yellow-500"}`}
-          title={skill.name}
-        >
-          {skill.icon}
-        </div>
-      ))}
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const SkillGrid = ({ title, skills }: { title: string; skills: Skill[] }) => (
+ <section className="mb-12 md:mb-0">
+   <div className="mb-6">
+      <h2 className="text-2xl font-bold text-white mb-6 text-center">{title}</h2>
+      <div className="w-12 h-[3px] bg-yellow-500 mt-2 rounded-full mx-auto"></div>
     </div>
-  </div>
+
+          <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+          className="grid grid-cols-2 gap-4"
+        >
+      {skills.map((skill, index) => (
+        <motion.div
+          key={index}
+          variants={itemVariants}
+          whileHover={{ y: -4 }}
+          className={`group flex flex-col items-center text-center p-4
+          bg-gray-900/50 backdrop-blur 
+          rounded-xl border border-gray-800
+          transition-all duration-300
+          hover:border-gray-600 hover:shadow-xl ${skill.glow}`}
+        >
+          <div
+            className={`text-3xl md:text-4xl mb-3 transition-transform duration-300 group-hover:scale-110 ${skill.color}`}
+          >
+            {skill.icon}
+          </div>
+
+          <p className="text-gray-300 text-sm font-medium">
+            {skill.name}
+          </p>
+        </motion.div>
+      ))}
+    </motion.div>
+  </section>
 );
 
-export default function SkillsCarousel() {
+export default function SkillsSection() {
   return (
-    <div className="container">
-      <Section skills={frontendSkills} />
-      <Section skills={backendSkills} reverse white/>
-   
+    <div className="w-full flex flex-col md:flex-row md:gap-12">
+      <div className="flex-1">
+        <SkillGrid title="Frontend" skills={frontendSkills} />
+      </div>
+
+      <div className="flex-1">
+        <SkillGrid title="Backend" skills={backendSkills} />
+      </div>
     </div>
   );
 }

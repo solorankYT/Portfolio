@@ -21,33 +21,33 @@ export default function Home() {
             </h3>
           
             <p className="text-gray-400 text-lg leading-relaxed">
-              <span className="text-yellow-400">Front-end Developer</span> with experience building e-commerce platforms and dashboards using <span className="text-yellow-400">React and TypeScript</span>. 
-             I focus on writing clean, maintainable code and following best practices
-              I enjoy working with others to build thoughtful, practical solutions.
+              I’m a <span className="text-yellow-400 font-semibold">Full-Stack Developer</span> with experience building web applications using <span className="text-yellow-400 font-semibold">RESTful APIs</span>, implementing <span className="text-yellow-400 font-semibold">unit and integration tests</span>, and ensuring reliable, maintainable code.  
+              I focus on clean architecture, debugging, and practical solutions that improve user workflows and system performance.
             </p>
-
-    
+          <div className="flex flex-row items-center space-x-6 mt-6 justify-between">
            <a href="./MarkFunaResume.pdf" download>
-            <div className="mt-4 button text-white hover:text-yellow-400"><span>Download CV </span></div>
+            <div className="mt-4 button text-white hover:text-yellow-400  border-gray-700 border-1 p-2"><span>Download CV </span></div>
             </a> 
 
-            <ul className="flex space-x-4 mt-6 text-gray-500 text-2xl ">
-              <li>
-             <a href="https://github.com/solorankYT"> 
-              <div className="hover:text-yellow-400"> <FaGithub />  </div> 
-             </a>
-              </li>
+            <ul className="flex space-x-4 mt-6 text-gray-500 text-2xl">
                 <li>
-             <a href="https://www.linkedin.com/in/markfuna/"> 
-              <div className="hover:text-yellow-400"> <FaLinkedin />  </div> 
-             </a>
-              </li>
-             <li>
-             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=markfuna6@gmail.com" target="_blank"> 
-              <div className="hover:text-yellow-400"> <CgMail />  </div> 
-             </a>
-              </li>
-            </ul>
+                  <a href="https://github.com/solorankYT" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" className="hover:text-yellow-400">
+                    <FaGithub />
+                  </a>
+                </li>
+                <li>
+                  <a href="https://www.linkedin.com/in/markfuna/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" className="hover:text-yellow-400">
+                    <FaLinkedin />
+                  </a>
+                </li>
+                <li>
+                  <a href="mailto:markfuna6@gmail.com" aria-label="Send Email" className="hover:text-yellow-400">
+                    <CgMail />
+                  </a>
+                </li>
+              </ul>
+
+            </div>
           </main>
       </ScrollSection>
 
@@ -60,7 +60,7 @@ export default function Home() {
 
        <ScrollSection>
           <section id="projects" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-bold text-white mb-6 text-center">Personal Projects</h2>
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Projects</h2>
             <Projects />
           </section>
           </ScrollSection>
