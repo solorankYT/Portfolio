@@ -26,6 +26,29 @@ html {
   100% { transform: translateX(0%); }
 }
 
+.custom-scroll::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.custom-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scroll::-webkit-scrollbar-thumb {
+  background: rgba(177, 177, 177, 0.3);
+  backdrop-filter: blur(4px);
+}
+
+.custom-scroll::-webkit-scrollbar-thumb:hover {
+  background: #facc15;
+}
+
+.custom-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #2d2d2d transparent;
+}
+
 .animate-scroll {
   animation: scroll  linear infinite;
 }

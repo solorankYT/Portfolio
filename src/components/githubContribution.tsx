@@ -65,11 +65,10 @@ export default function SolorankContributions() {
   if (error) return <p>{error}</p>;
 
   return (
-    <div>
      
-      <div className="text-gray-100 bg-gray-900 p-6 rounded-lg shadow-lg">
+      <div className="text-gray-100 bg-gray-900 p-6 rounded-lg shadow-lg overflow-x-auto custom-scroll">
         <ActivityCalendar data={data} theme={greenTheme} />
       </div>
-    </div>
+
   );
 }
