@@ -1,20 +1,15 @@
 import {
   FaJs,
-  FaHtml5,
 } from "react-icons/fa";
 
 import {
-  SiCss3,
-  SiFirebase,
   SiLaravel,
   SiMysql,
   SiNextdotjs,
   SiNodedotjs,
-  SiPhp,
   SiPostgresql,
   SiReact,
   SiTypescript,
-  SiVuedotjs,
 } from "react-icons/si";
 
 import { motion } from "framer-motion";
@@ -50,14 +45,14 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  show: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" },
-  },
-};
+// const itemVariants = {
+//   hidden: { opacity: 0, y: 30 },
+//   show: {
+//     opacity: 1,
+//     y: 0,
+//     transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] },
+//   },
+// };
 
 const SkillGrid = ({ title, skills }: { title: string; skills: Skill[] }) => (
  <section className="mb-12 md:mb-0">
@@ -76,7 +71,6 @@ const SkillGrid = ({ title, skills }: { title: string; skills: Skill[] }) => (
       {skills.map((skill, index) => (
         <motion.div
           key={index}
-          variants={itemVariants}
           whileHover={{ y: -4 }}
           className={`group flex flex-col items-center text-center p-4
           bg-gray-900/50 backdrop-blur 
