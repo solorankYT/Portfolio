@@ -1,9 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/navBar";
 import Home from "./Home";
-import About from "./About";
 import ProjectPage from "./ProjectPage";
-import ScrollToTop from "./components/ScrollToTop";
 import { lazy, Suspense } from 'react';
 
 const About = lazy(() => import('./About'));
