@@ -99,6 +99,14 @@ export default function Projects() {
       link: "#",
       type: "client",
     },
+      {
+      title: "Barangay Information Management System",
+      image: ["./barangayims/1.png", "./barangayims/2.png", "./barangayims/3.png", "./barangayims/4.png", "./barangayims/5.png", "./barangayims/6.png", "./barangayims/7.png"],
+      description: "Hotel reservation billing system",
+      techstack: ["Laravel 12", "HTML", "JavaScript", "API", "CSS"],
+      link: "#",
+      type: "client",
+    },
   ];
 
   const filteredProjects = projects.filter((p) => p.type === activeTab);
