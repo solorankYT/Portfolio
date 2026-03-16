@@ -3,9 +3,9 @@ import {
 } from "react-icons/fa";
 
 import {
+  SiHtml5,
   SiLaravel,
-  SiMysql,
-  SiNextdotjs,
+  SiMysql,  
   SiNodedotjs,
   SiPostgresql,
   SiReact,
@@ -22,10 +22,11 @@ type Skill = {
 };
 
 const frontendSkills: Skill[] = [
+    { icon: <SiHtml5 />, name: "HTML", color: "text-orange-500", glow: "hover:shadow-orange-300/40" },
   { icon: <FaJs />, name: "JavaScript", color: "text-yellow-400", glow: "hover:shadow-yellow-500/40" },
   { icon: <SiTypescript />, name: "TypeScript", color: "text-blue-500", glow: "hover:shadow-blue-500/40" },
   { icon: <SiReact />, name: "React", color: "text-cyan-400", glow: "hover:shadow-cyan-400/40" },
-  { icon: <SiNextdotjs />, name: "Next.js", color: "text-gray-300", glow: "hover:shadow-gray-300/40" },
+
 ];
 
 const backendSkills: Skill[] = [
