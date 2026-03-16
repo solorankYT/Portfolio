@@ -161,22 +161,22 @@ export default function Projects() {
     <div className="space-y-8">
       <div className="flex justify-center mb-8">
   <div className="flex w-full max-w-md bg-gray-800 border border-gray-700 rounded-xl p-1">
-    {(["personal", "client"] as const).map((tab) => (
-      <button
-        key={tab}
-        onClick={() => setActiveTab(tab)}
-        className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all duration-300
-        ${
-          activeTab === tab
-            ? "bg-yellow-500 text-black shadow"
-            : "text-gray-400 hover:text-white"
-        }`}
-      >
-        {tab === "personal" ? "Personal Projects" : "Client Work"}
-      </button>
-    ))}
-  </div>
-</div>
+        {(["client", "personal"] as const).map((tab) => (
+          <button
+            key={tab}
+            onClick={() => setActiveTab(tab)}
+            className={`flex-1 py-2 text-sm font-medium rounded-lg transition-all duration-300
+            ${
+              activeTab === tab
+                ? "bg-yellow-500 text-black shadow"
+                : "text-gray-400 hover:text-white"
+            }`}
+          >
+            {tab === "personal" ? "Personal Projects" : "Client Work"}
+          </button>
+        ))}
+      </div>
+    </div>
       {filteredProjects.map((project, index) => (
         <div
           key={index}
@@ -190,7 +190,7 @@ export default function Projects() {
             }}
             className="w-full text-left focus:outline-none"
           >
-           <div className="group bg-gray-900 border border-gray-800 rounded-2xl p-6 
+           <div className="group  rounded-2xl p-6 
               hover:border-yellow-500/40 hover:shadow-xl hover:shadow-yellow-500/10 
               transition-all duration-300">
 
