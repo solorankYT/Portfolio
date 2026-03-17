@@ -5,6 +5,7 @@ import {FaGithub, FaLinkedin } from "react-icons/fa";
 import { CgMail } from "react-icons/cg";
 import GitHubContribution from "./components/githubContribution";
 import ScrollSection from "./components/ScrollSection";
+import Certificate from "./components/certificate";
 
 export default function Home() {
   return (
@@ -64,6 +65,13 @@ export default function Home() {
             <Projects />
           </section>
           </ScrollSection>
+
+        <ScrollSection>
+              <section id="projects" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
+            <h2 className="text-2xl font-bold text-white mb-6 text-center">Certificates</h2>
+            <Certificate />
+          </section>
+        </ScrollSection>
 
           <ScrollSection>
           <section className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
