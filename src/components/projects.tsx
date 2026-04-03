@@ -19,6 +19,7 @@ import {
 } from "react-icons/si";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
 
 type Project = {
   title: string;
@@ -36,7 +37,7 @@ type Project = {
 export default function Projects() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const [activeTab, setActiveTab] = useState<"personal" | "client">("personal");
+  const [activeTab, setActiveTab] = useState<"personal" | "client">("client");
   const [carouselIndex, setCarouselIndex] = useState(0);
 
   useEffect(() => {
@@ -158,9 +159,10 @@ export default function Projects() {
   const filteredProjects = projects.filter((p) => p.type === activeTab);
 
   return (
+
     <div className="space-y-8">
       <div className="flex justify-center mb-8">
-  <div className="flex w-full max-w-md bg-gray-800 border border-gray-700 rounded-xl p-1">
+        <div className="flex w-full max-w-md bg-gray-800 border border-gray-700 rounded-xl p-1">
         {(["client", "personal"] as const).map((tab) => (
           <button
             key={tab}
@@ -171,17 +173,22 @@ export default function Projects() {
                 ? "bg-yellow-500 text-black shadow"
                 : "text-gray-400 hover:text-white"
             }`}
-          >
-            {tab === "personal" ? "Personal Projects" : "Client Work"}
+          >  
+            {tab === "client" ? "Client Work" : "Personal Projects"}
           </button>
         ))}
       </div>
     </div>
-      {filteredProjects.map((project, index) => (
+
+    {filteredProjects.map((project, index) => (
+      <Carousel>
+        <CarouselContent>
+             <CarouselItem>
         <div
           key={index}
-          className="bg-gray-900 border border-gray-700 rounded-xl shadow-lg p-6 hover:shadow-yellow-500/10 transition-all duration-300"
+          className="bg-red-900 border border-gray-700 rounded-xl shadow-lg p-6 hover:shadow-yellow-500/10 transition-all duration-300"
         >
+       
           <button
             onClick={() => {
               setSelectedProject(project);
@@ -244,9 +251,13 @@ export default function Projects() {
                 </div>
               </div>
           </button>
+        
         </div>
+        </CarouselItem>
+      </CarouselContent>
+     </Carousel>
       ))}
-
+  
       <AnimatePresence>
               {isOpen && selectedProject && (
                 <motion.div
@@ -352,3 +363,4 @@ export default function Projects() {
     </div>
   );
 }
+
