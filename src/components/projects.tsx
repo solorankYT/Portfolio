@@ -180,15 +180,14 @@ export default function Projects() {
       </div>
     </div>
 
+    <Carousel
+  opts={{ align: "start", loop: true }}
+  className="w-full"
+>
+  <CarouselContent className="-ml-4">
     {filteredProjects.map((project, index) => (
-      <Carousel>
-        <CarouselContent>
-             <CarouselItem>
-        <div
-          key={index}
-          className="bg-red-900 border border-gray-700 rounded-xl shadow-lg p-6 hover:shadow-yellow-500/10 transition-all duration-300"
-        >
-       
+      <CarouselItem key={index} className="pl-4 basis-full">
+        <div className="bg-gray-900 border border-gray-700 rounded-xl shadow-lg p-6 hover:shadow-yellow-500/10 transition-all duration-300 h-full">
           <button
             onClick={() => {
               setSelectedProject(project);
@@ -197,66 +196,70 @@ export default function Projects() {
             }}
             className="w-full text-left focus:outline-none"
           >
-           <div className="group  rounded-2xl p-6 
-              hover:border-yellow-500/40 hover:shadow-xl hover:shadow-yellow-500/10 
-              transition-all duration-300">
+            <div className="group">
 
-                {/* Image */}
-                <div className="relative h-60 rounded-xl overflow-hidden mb-6">
-                  <img
-                    src={project.image[0]}
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                </div>
-
-                {/* Title */}
-                <h2 className="text-xl font-semibold text-white tracking-tight">
-                  {project.title}
-                </h2>
-
-                {/* Description */}
-                <p className="text-gray-400 mt-2 text-sm leading-relaxed line-clamp-3">
-                  {project.description}
-                </p>
-
-                {/* Tech Stack Pills */}
-                <div className="flex flex-wrap gap-2 mt-4">
-                  {project.techstack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-3 py-1 text-xs font-medium bg-gray-800 border border-gray-700 rounded-full text-gray-300"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Review */}
-                {project.review && (
-                  <div className="mt-5 pt-4 border-t border-gray-800">
-                    <div className="flex items-center gap-2 mb-1">
-                      {stars(project.review.rating.toString())}
-                    </div>
-                    <p className="text-gray-300 text-sm italic">
-                      “{project.review.message}”
-                    </p>
-                  </div>
-                )}
-
-                {/* CTA */}
-                <div className="mt-5 text-yellow-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition">
-                  View Project →
-                </div>
+              {/* Image */}
+              <div className="relative h-64 rounded-xl overflow-hidden mb-5">
+                <img
+                  src={project.image[0]}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
               </div>
+
+              <h2 className="text-xl font-semibold text-white tracking-tight">
+                {project.title}
+              </h2>
+
+              <p className="text-gray-400 mt-2 text-sm leading-relaxed line-clamp-3 min-h-[60px]">
+                {project.description}
+              </p>
+
+              {/* Tech Stack Pills */}
+              <div className="flex flex-wrap gap-2 mt-4 min-h-[36px]">
+                {project.techstack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-3 py-2 text-xs font-medium bg-gray-800 border border-gray-700 rounded-full text-gray-300"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {/* Review */}
+              {project.review && (
+                <div className="mt-5 pt-4 border-t border-gray-800">
+                  <div className="flex items-center gap-2 mb-1">
+                    {stars(project.review.rating.toString())}
+                  </div>
+                  <p className="text-gray-300 text-sm italic line-clamp-2">
+                    "{project.review.message}"
+                  </p>
+                </div>
+              )}
+
+              {/* CTA */}
+              <div className="mt-5 text-yellow-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition">
+                View Project →
+              </div>
+            </div>
           </button>
-        
         </div>
-        </CarouselItem>
-      </CarouselContent>
-     </Carousel>
-      ))}
+      </CarouselItem>
+    ))}
+  </CarouselContent>
+
+  {/* Nav + dots */}
+  <div className="flex items-center justify-center gap-4 mt-6">
+    <CarouselPrevious className="static translate-y-0 bg-gray-800 border-gray-700 text-white hover:bg-yellow-500 hover:text-black hover:border-yellow-500" />
+    <CarouselNext className="static translate-y-0 bg-gray-800 border-gray-700 text-white hover:bg-yellow-500 hover:text-black hover:border-yellow-500" />
+  </div>
+</Carousel>
+
+
+
   
       <AnimatePresence>
               {isOpen && selectedProject && (
