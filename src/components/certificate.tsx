@@ -22,6 +22,46 @@ const certificates = [
     issuer: "Cisco",
     year: "2024",
   },
+    {
+    title: "Blender Software Training",
+    issuer: "Blender Foundation",
+    year: "2024",
+  },
+  {
+    title: "Networking Basics",
+    issuer: "Cisco",
+    year: "2024",
+  },
+  {
+    title: "AI Fundamentals with IBM SkillsBuild",
+    issuer: "IBM",
+    year: "2024",
+  },
+  {
+    title: "JavaScript Essentials 2",
+    issuer: "Cisco",
+    year: "2024",
+  },
+    {
+    title: "Blender Software Training",
+    issuer: "Blender Foundation",
+    year: "2024",
+  },
+  {
+    title: "Networking Basics",
+    issuer: "Cisco",
+    year: "2024",
+  },
+  {
+    title: "AI Fundamentals with IBM SkillsBuild",
+    issuer: "IBM",
+    year: "2024",
+  },
+  {
+    title: "JavaScript Essentials 2",
+    issuer: "Cisco",
+    year: "2024",
+  },
 ];
 
 export default function Certificate() {
