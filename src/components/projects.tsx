@@ -19,7 +19,7 @@ import {
 } from "react-icons/si";
 import { Button } from "./ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from "./ui/carousel";
 
 type Project = {
   title: string;
@@ -39,6 +39,8 @@ export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [activeTab, setActiveTab] = useState<"personal" | "client">("client");
   const [carouselIndex, setCarouselIndex] = useState(0);
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => e.key === "Escape" && setIsOpen(false);
@@ -158,6 +160,19 @@ export default function Projects() {
 
   const filteredProjects = projects.filter((p) => p.type === activeTab);
 
+  useEffect(() => {
+  if (!api) return;
+  setCurrent(api.selectedScrollSnap());
+  api.on("select", () => setCurrent(api.selectedScrollSnap()));
+}, [api]);
+ 
+// Reset dot when tab changes
+useEffect(() => {
+  if (!api) return;
+  api.scrollTo(0);
+  setCurrent(0);
+}, [activeTab, api]);
+
   return (
 
     <div className="space-y-8">
@@ -180,83 +195,104 @@ export default function Projects() {
       </div>
     </div>
 
-    <Carousel
-  opts={{ align: "start", loop: true }}
-  className="w-full"
->
-  <CarouselContent className="-ml-4">
-    {filteredProjects.map((project, index) => (
-      <CarouselItem key={index} className="pl-4 basis-full">
-        <div className="bg-gray-900 border border-gray-700 rounded-xl shadow-lg p-6 hover:shadow-yellow-500/10 transition-all duration-300 h-full">
-          <button
-            onClick={() => {
-              setSelectedProject(project);
-              setCarouselIndex(0);
-              setIsOpen(true);
-            }}
-            className="w-full text-left focus:outline-none"
-          >
-            <div className="group">
 
-              {/* Image */}
-              <div className="relative h-64 rounded-xl overflow-hidden mb-5">
-                <img
-                  src={project.image[0]}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-              </div>
+<div className="relative">
+  <Carousel
+    setApi={setApi}
+    opts={{ align: "start", loop: true }}
+    className="w-full"
+  >
+    <CarouselContent className="-ml-4">
+      {filteredProjects.map((project, index) => (
+        <CarouselItem key={index} className="pl-4 basis-full">
+          <div className="bg-gray-900 border border-gray-700 rounded-xl shadow-lg p-6 hover:shadow-yellow-500/10 transition-all duration-300 h-full">
+            <button
+              onClick={() => {
+                setSelectedProject(project);
+                setCarouselIndex(0);
+                setIsOpen(true);
+              }}
+              className="w-full text-left focus:outline-none"
+            >
+              <div className="group">
 
-              <h2 className="text-xl font-semibold text-white tracking-tight">
-                {project.title}
-              </h2>
-
-              <p className="text-gray-400 mt-2 text-sm leading-relaxed line-clamp-3 min-h-[60px]">
-                {project.description}
-              </p>
-
-              {/* Tech Stack Pills */}
-              <div className="flex flex-wrap gap-2 mt-4 min-h-[36px]">
-                {project.techstack.map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-3 py-2 text-xs font-medium bg-gray-800 border border-gray-700 rounded-full text-gray-300"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-
-              {/* Review */}
-              {project.review && (
-                <div className="mt-5 pt-4 border-t border-gray-800">
-                  <div className="flex items-center gap-2 mb-1">
-                    {stars(project.review.rating.toString())}
-                  </div>
-                  <p className="text-gray-300 text-sm italic line-clamp-2">
-                    "{project.review.message}"
-                  </p>
+               
+                <div className="relative h-64 rounded-xl overflow-hidden mb-5">
+                  <img
+                    src={project.image[0]}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
                 </div>
-              )}
 
-              {/* CTA */}
-              <div className="mt-5 text-yellow-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition">
-                View Project →
+                
+                <h2 className="text-xl font-semibold text-white tracking-tight">
+                  {project.title}
+                </h2>
+
+                
+                <p className="text-gray-400 mt-2 text-sm leading-relaxed line-clamp-3 min-h-[60px]">
+                  {project.description}
+                </p>
+
+                
+                <div className="flex flex-wrap gap-2 mt-4 min-h-[36px]">
+                  {project.techstack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-3 py-1 text-xs font-medium bg-gray-800 border border-gray-700 rounded-full text-gray-300"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                
+                {project.review && (
+                  <div className="mt-5 pt-4 border-t border-gray-800">
+                    <div className="flex items-center gap-2 mb-1">
+                      {stars(project.review.rating.toString())}
+                    </div>
+                    <p className="text-gray-300 text-sm italic line-clamp-2">
+                      "{project.review.message}"
+                    </p>
+                  </div>
+                )}
+
+                
+                <div className="mt-5 text-yellow-400 text-sm font-medium opacity-0 group-hover:opacity-100 transition">
+                  View Project →
+                </div>
               </div>
-            </div>
-          </button>
-        </div>
-      </CarouselItem>
-    ))}
-  </CarouselContent>
+            </button>
+          </div>
+        </CarouselItem>
+      ))}
+    </CarouselContent>
 
-  {/* Nav + dots */}
-  <div className="flex items-center justify-center gap-4 mt-6">
-    <CarouselPrevious className="static translate-y-0 bg-gray-800 border-gray-700 text-white hover:bg-yellow-500 hover:text-black hover:border-yellow-500" />
-    <CarouselNext className="static translate-y-0 bg-gray-800 border-gray-700 text-white hover:bg-yellow-500 hover:text-black hover:border-yellow-500" />
+    
+    <CarouselPrevious className="absolute -left-5 top-1/2 -translate-y-1/2 bg-gray-800 border-gray-700 text-white hover:bg-yellow-500 hover:text-black hover:border-yellow-500" />
+
+    
+    <CarouselNext className="absolute -right-5 top-1/2 -translate-y-1/2 bg-gray-800 border-gray-700 text-white hover:bg-yellow-500 hover:text-black hover:border-yellow-500" />
+  </Carousel>
+
+  
+  <div className="flex items-center justify-center gap-2 mt-6">
+    {filteredProjects.map((_, i) => (
+      <button
+        key={i}
+        onClick={() => api?.scrollTo(i)}
+        className={`rounded-full transition-all duration-300 ${
+          i === current
+            ? "bg-yellow-400 w-3 h-3"
+            : "bg-gray-600 hover:bg-gray-400 w-2.5 h-2.5"
+        }`}
+      />
+    ))}
   </div>
-</Carousel>
+</div>
 
 
 
