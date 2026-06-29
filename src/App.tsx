@@ -1,7 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import NavBar from "./components/navBar";
 import Home from "./Home";
-import ProjectPage from "./ProjectPage";
 import { lazy, Suspense } from 'react';
 
 const About = lazy(() => import('./About'));
@@ -17,7 +16,6 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/projectpage" element={<ProjectPage />} />
         </Routes>
           </Suspense>
       </main>

@@ -3,64 +3,24 @@ import { Award } from "lucide-react";
 
 const certificates = [
   {
-    title: "Blender Software Training",
-    issuer: "Blender Foundation",
-    year: "2024",
-  },
-  {
-    title: "Networking Basics",
-    issuer: "Cisco",
-    year: "2024",
-  },
-  {
     title: "AI Fundamentals with IBM SkillsBuild",
     issuer: "IBM",
     year: "2024",
   },
   {
-    title: "JavaScript Essentials 2",
-    issuer: "Cisco",
-    year: "2024",
+    title: "Unix and Linux Essentials",
+    issuer: "Oracle",
+    year: "2026",
   },
     {
-    title: "Blender Software Training",
-    issuer: "Blender Foundation",
-    year: "2024",
+    title: "Oracle Database 19c: SQL and PL/SQL Fundamentals",
+    issuer: "Oracle",
+    year: "2026",
   },
   {
-    title: "Networking Basics",
-    issuer: "Cisco",
-    year: "2024",
-  },
-  {
-    title: "AI Fundamentals with IBM SkillsBuild",
-    issuer: "IBM",
-    year: "2024",
-  },
-  {
-    title: "JavaScript Essentials 2",
-    issuer: "Cisco",
-    year: "2024",
-  },
-    {
-    title: "Blender Software Training",
-    issuer: "Blender Foundation",
-    year: "2024",
-  },
-  {
-    title: "Networking Basics",
-    issuer: "Cisco",
-    year: "2024",
-  },
-  {
-    title: "AI Fundamentals with IBM SkillsBuild",
-    issuer: "IBM",
-    year: "2024",
-  },
-  {
-    title: "JavaScript Essentials 2",
-    issuer: "Cisco",
-    year: "2024",
+    title: "Oracle cloud Infrastructure (OCI) Foundations 2025 Certified Associate",
+    issuer: "Oracle",
+    year: "2025",
   },
 ];
 
