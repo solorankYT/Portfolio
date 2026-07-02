@@ -20,6 +20,8 @@ import {
   SiOracle,
   SiHeroku,
   SiGithubactions,
+  SiKnexdotjs,
+  SiNextdotjs,
 } from "react-icons/si";
 
 import { motion } from "framer-motion";
@@ -64,8 +66,8 @@ const frontendSkills: Skill[] = [
     glow: "hover:shadow-emerald-500/30",
   },
   {
-    icon: <SiShadcnui />,
-    name: "shadcn/ui",
+    icon: <SiNextdotjs />,
+    name: "Next.js",
     color: "text-zinc-100",
     glow: "hover:shadow-zinc-400/30",
   },
@@ -180,7 +182,7 @@ const itemVariants = {
       ease: [0.25, 0.46, 0.45, 0.94] as const,
     },
   },
-};
+};  
 
 type SkillGridProps = {
   title: string;
