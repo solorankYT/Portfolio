@@ -22,6 +22,17 @@ const certificates = [
     issuer: "Oracle",
     year: "2025",
   },
+   {
+    title: "Oracle Database 19c: PL/SQL Professional",
+    issuer: "Oracle",
+    year: "2025",
+  },
+   {
+    title: "Oracle Database 19c: SQL Associate",
+    issuer: "Oracle",
+    year: "2025",
+  },
+
 ];
 
 export default function Certificate() {
