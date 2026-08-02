@@ -135,6 +135,38 @@ export default function Projects() {
       }
     },
     {
+  title: "Fresh Connection – E-Commerce & Inventory Management System",
+  image: [
+    "./freshconnection/1.png",
+    "./freshconnection/2.png",
+    "./freshconnection/3.png",
+    "./freshconnection/4.png",
+    "./freshconnection/5.png"
+  ],
+ description:
+  "Designed and developed a modern full-stack e-commerce and inventory management system for a fresh produce business. The application includes a responsive customer storefront, role-based administration, secure email two-factor authentication, product and category management, inventory tracking, order management, promotional campaigns, sales analytics, and PDF reporting. Built with Laravel and React, the system streamlines business operations, improves inventory visibility, enhances security, and provides actionable insights through a clean administrative dashboard.",
+  techstack: [
+    "Laravel 12",
+    "React",
+    "MySQL",
+    "Inertia.js",
+    "Tailwind CSS",
+    "JavaScript",
+    "REST API",
+    "Vite",
+    "Laravel Breeze",
+    "Spatie Permissions"
+  ],
+  link: "#",
+  type: "client",
+  review: {
+    rating: 5,
+    message:
+      "The platform modernized our business by simplifying inventory management, customer orders, and sales reporting. The dashboard is easy to use, the security features give us confidence, and the overall system has significantly improved our daily operations."
+  }
+},
+
+    {
       title: "Barangay Information Management System",
       image: [
         "./barangayims/1.png",

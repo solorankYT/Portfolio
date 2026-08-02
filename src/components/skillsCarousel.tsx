@@ -16,11 +16,9 @@ import {
   SiReact,
   SiTypescript,
   SiVuedotjs,
-  SiShadcnui,
   SiOracle,
   SiHeroku,
   SiGithubactions,
-  SiKnexdotjs,
   SiNextdotjs,
 } from "react-icons/si";
 
