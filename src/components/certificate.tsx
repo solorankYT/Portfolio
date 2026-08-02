@@ -10,6 +10,7 @@ const certificates = [
     link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F48C08D594ADA2515717124E534D1E640D674F5F6A57EE93955B839A5237AD60",
   },
   {
+    //
     title: "Oracle Database 19c: PL/SQL Professional Certified",
     issuer: "Oracle",
     year: "2026",
