@@ -19,7 +19,9 @@ export default function Home() {
           <section id="home">
             <main className="container max-w-3xl mx-auto mt-20 md:mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg border-b-0">
               <p className="text-xs font-semibold tracking-[0.2em] uppercase text-yellow-500 mb-3">
-                Full-Stack Developer
+                Software Engineer
+                <br />
+                <span className="text-gray-300">specializing in full-stack development</span>
               </p>
               <h1 className="text-4xl font-extrabold text-white mb-3">
                 Hi, I'm <span className="text-yellow-400">Mark Funa</span>
@@ -30,17 +32,16 @@ export default function Home() {
               </h3>
 
               <p className="text-gray-400 text-base leading-relaxed mb-6">
-                I build full-stack web applications end-to-end — from REST APIs and
-                database design to React UIs and CI/CD pipelines. I work across{" "}
+                I've built 5+ full-stack applications, including three developed as
+                undergraduate capstone projects in partnership with real small businesses —
+                a hotel booking and billing platform, an e-commerce and inventory system,
+                and a local government records system.{" "}
                 <span className="text-gray-200 font-medium">
-                  Node.js, Laravel, PostgreSQL, Docker, and AWS
+                  Day job is enterprise support — side projects are where I build.
                 </span>
-                , with a focus on clean architecture, test coverage, and systems that
-                are easy to debug and extend.
               </p>
 
-             
-              <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
                 <a
                   href="./MarkFunaResume.pdf"
                   download
@@ -51,7 +52,14 @@ export default function Home() {
                   Download CV
                 </a>
 
-            
+                <a
+                  href="#projects"
+                  className="inline-flex items-center gap-2 px-5 py-2.5
+                    text-sm font-semibold text-gray-200 border border-gray-600
+                    rounded-lg hover:border-gray-400 hover:text-white transition-colors duration-200"
+                >
+                  View Projects
+                </a>
               </div>
             </main>
           </section>
@@ -66,7 +74,10 @@ export default function Home() {
 
         <ScrollSection>
           <section id="projects" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-bold text-white mb-6 text-center">Projects</h2>
+            <h2 className="text-2xl font-bold text-white mb-2 text-center">Projects</h2>
+            <p className="text-gray-500 text-sm text-center mb-6">
+              Client projects were developed as undergraduate capstone work, built and deployed for real businesses.
+            </p>
             <Projects />
           </section>
         </ScrollSection>
@@ -77,7 +88,6 @@ export default function Home() {
             <About />
           </section>
         </ScrollSection>
-
 
         <ScrollSection>
           <section id="certificates" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
@@ -95,7 +105,7 @@ export default function Home() {
 
         <footer className="container max-w-3xl mx-auto mt-10 mb-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
           <p className="text-gray-400 text-center">
-            © 2025 Mark Funa. All rights reserved.
+            © {new Date().getFullYear()} Mark Funa. All rights reserved.
           </p>
         </footer>
 

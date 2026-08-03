@@ -20,11 +20,13 @@ import {
   SiHeroku,
   SiGithubactions,
   SiNextdotjs,
+  SiSupabase,
+  SiFirebase,
+  SiExpress,
 } from "react-icons/si";
 
 import { motion } from "framer-motion";
 import { Database, Server } from "lucide-react";
-
 type Skill = {
   icon: React.ReactNode;
   name: string;
@@ -108,6 +110,26 @@ const backendSkills: Skill[] = [
     color: "text-orange-400",
     glow: "hover:shadow-orange-400/30",
   },
+  {
+    icon: <SiFirebase />,
+    name: "Firebase",
+    color: "text-yellow-400",
+    glow: "hover:shadow-yellow-400/30",
+  },
+  {
+    icon: <SiSupabase />,
+    name: "Supabase",
+    color: "text-blue-500",
+    glow: "hover:shadow-blue-500/30",
+  },
+  {
+    icon: <SiExpress />,
+    name: "Express.js",
+    color: "text-gray-400",
+    glow: "hover:shadow-gray-400/30",
+  }
+  
+
 ];
 
 const devOpsSkills: Skill[] = [
