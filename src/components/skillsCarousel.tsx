@@ -76,7 +76,6 @@ const devOpsSkills: Skill[] = [
   { icon: <FaLinux />, name: "Linux / Unix", color: "group-hover:text-yellow-300 group-focus-visible:text-yellow-300", level: "core" },
   { icon: <FaAws />, name: "AWS", color: "group-hover:text-orange-400 group-focus-visible:text-orange-400", level: "familiar" },
   { icon: <SiGithubactions />, name: "CI/CD", color: "group-hover:text-violet-400 group-focus-visible:text-violet-400", level: "familiar" },
-  { icon: <SiHeroku />, name: "Heroku", color: "group-hover:text-purple-400 group-focus-visible:text-purple-400", level: "familiar" },
   { icon: <Server />, name: "Hostinger", color: "group-hover:text-violet-500 group-focus-visible:text-violet-500", level: "familiar" },
 ];
 
