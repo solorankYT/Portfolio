@@ -63,7 +63,7 @@ export default function HeroSection() {
         are easy to debug and extend.
       </motion.p>
 
-      {/* Tech tags */}
+      
       <motion.div
         {...fadeUp(0.28)}
         className="flex flex-wrap gap-2 mb-8"

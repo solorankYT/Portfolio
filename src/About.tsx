@@ -42,7 +42,21 @@ const experience = [
       "Implemented role-based access control using Spatie to manage user roles and enforce authorization policies.",
       "Contributed to debugging, feature testing, and UI enhancements, improving responsiveness and accessibility."
     ]
+  },
+  {
+    title: "Accenture Associate Software Engineer",
+    duration: "May 2026 – Present",
+    stack: ["SQL", "PL/SQL", "  PL/SQL", "Oracle Database", "ServiceNow", "Application Support"],
+responsibilities: [
+      "Developed a student portal and admin dashboard for course enrollment and record tracking.",
+      "Designed and implemented RESTful APIs with request validation, authentication, and secure data handling.",
+      "Implemented role-based access control using Spatie to manage user roles and enforce authorization policies.",
+      "Contributed to debugging, feature testing, and UI enhancements, improving responsiveness and accessibility."
+    ]
+    
+    
   }
+
 ];
 
 export default function About() {
@@ -52,7 +66,7 @@ export default function About() {
 
   return (
     <ScrollSection>
-      <section className="max-w-3xl w-full space-y-8">
+      <section className="max-w-3xl w-full space-y-7">
         <div className="flex flex-col gap-8">
           {displayedExperience.map((exp, index) => (
             <article
