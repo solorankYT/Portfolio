@@ -17,7 +17,6 @@ import {
   SiTypescript,
   SiVuedotjs,
   SiOracle,
-  SiHeroku,
   SiGithubactions,
   SiNextdotjs,
   SiSupabase,
