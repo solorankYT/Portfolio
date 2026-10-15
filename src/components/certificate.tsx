@@ -14,7 +14,7 @@ const certificates = [
     title: "Oracle Database 19c: PL/SQL Professional Certified",
     issuer: "Oracle",
     year: "2026",
-    link: "https://your-certificate-link.com",
+    link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=5B4DD06F9F1FAC6E2EBCF934EF539793A149FD7BD68CCDCE8729DA9C29614CCD",
   },
   {
     title: "Unix and Linux Essentials",
