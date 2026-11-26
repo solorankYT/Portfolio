@@ -1,7 +1,6 @@
 import { useEffect } from "react";
-import { ArrowLeft } from "lucide-react";
 import Home from "./Home";
-import NavBar from "./components/navBar";
+import SideNav from "./components/navBar";
 
 export default function App() {
   const pathname = window.location.pathname.replace(/\/+$/, "") || "/";
@@ -20,22 +19,20 @@ export default function App() {
   }, [isPortfolio, legacyAbout]);
 
   return (
-    <>
+    <div className="min-h-screen bg-gray-900 dark:bg-gray-950">
       <a className="skip-link" href="#main-content">Skip to content</a>
-      <NavBar isPortfolio={isPortfolio} />
+      <SideNav isPortfolio={isPortfolio} />
       {isPortfolio ? (
         <Home />
       ) : (
-        <main className="site-container not-found" id="main-content" tabIndex={-1}>
-          <p className="eyebrow">404</p>
-          <h1>Page not found</h1>
-          <p>Find my projects, experience, and contact details on the homepage.</p>
-          <a className="site-button site-button--primary" href="/">
-            <ArrowLeft size={17} aria-hidden="true" />
-            Back to the portfolio
-          </a>
+        <main className="md:ml-52 px-3 pt-20 md:pt-10" id="main-content" tabIndex={-1}>
+          <div className="container max-w-3xl mx-auto p-8 bg-gray-800 border border-gray-700 rounded-xl text-gray-200">
+            <p className="mb-2 text-sm font-semibold text-yellow-400">404</p>
+            <h1 className="mb-3 text-3xl font-bold text-white">Page not found</h1>
+            <a className="text-yellow-400 underline underline-offset-4" href="/">Back to the portfolio</a>
+          </div>
         </main>
       )}
-    </>
+    </div>
   );
 }

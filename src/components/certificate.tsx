@@ -1,16 +1,13 @@
-import { ArrowUpRight, Award } from "lucide-react";
-import "../credentials.css";
+import { Award, ExternalLink } from "lucide-react";
 
 const certificates = [
   {
     title: "Oracle Database SQL Certified Associate",
-    badgeUrl:
-      "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F48C08D594ADA2515717124E534D1E640D674F5F6A57EE93955B839A5237AD60",
+    link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F48C08D594ADA2515717124E534D1E640D674F5F6A57EE93955B839A5237AD60",
   },
   {
     title: "Oracle Database PL/SQL Certified Professional",
-    badgeUrl:
-      "https://catalog-education.oracle.com/ords/certview/sharebadge?id=5B4DD06F9F1FAC6E2EBCF934EF539793A149FD7BD68CCDCE8729DA9C29614CCD",
+    link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=5B4DD06F9F1FAC6E2EBCF934EF539793A149FD7BD68CCDCE8729DA9C29614CCD",
   },
   {
     title: "Oracle Cloud Infrastructure Foundations Certified Associate",
@@ -20,31 +17,51 @@ const certificates = [
   },
 ];
 
+const cardClassName = "flex h-full flex-col gap-3 rounded-xl border border-gray-700 bg-gray-900 p-4";
+
 export default function Certificate() {
   return (
-    <ul className="credential-list" role="list">
-      {certificates.map(({ title, badgeUrl }) => (
-        <li key={title} className="credential-card">
-          <span className="credential-icon" aria-hidden="true">
-            <Award size={21} strokeWidth={1.6} />
-          </span>
-          <div className="credential-body">
-            <h3>{title}</h3>
-            <p className="credential-issuer">
-              Oracle · <time dateTime="2026">2026</time>
-            </p>
-            {badgeUrl && (
+    <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" role="list">
+      {certificates.map(({ title, link }) => {
+        const content = (
+          <>
+            <div className="flex items-start justify-between gap-3">
+              <div className="flex items-start gap-2">
+                <Award className="mt-0.5 h-4 w-4 shrink-0 text-yellow-400" aria-hidden="true" />
+                <p className="text-sm font-medium leading-snug text-white">{title}</p>
+              </div>
+              {link && (
+                <ExternalLink className="h-4 w-4 shrink-0 text-gray-500 transition-colors group-hover:text-yellow-400" aria-hidden="true" />
+              )}
+            </div>
+
+            <div className="flex items-center justify-between pl-6">
+              <span className="truncate text-xs text-gray-400">Oracle</span>
+              <time dateTime="2026" className="inline-flex shrink-0 items-center rounded-full border border-gray-700 px-2 py-0 text-[10px] font-medium text-gray-400">
+                2026
+              </time>
+            </div>
+          </>
+        );
+
+        return (
+          <li key={title}>
+            {link ? (
               <a
-                className="credential-link"
-                href={badgeUrl}
-                aria-label={`View badge for ${title}`}
+                className={`${cardClassName} group transition-all duration-300 hover:-translate-y-1 hover:border-yellow-500/50 hover:shadow-lg hover:shadow-yellow-500/10 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-400`}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                View badge <ArrowUpRight size={15} aria-hidden="true" />
+                {content}
+                <span className="sr-only"> (opens in a new tab)</span>
               </a>
+            ) : (
+              <div className={cardClassName}>{content}</div>
             )}
-          </div>
-        </li>
-      ))}
+          </li>
+        );
+      })}
     </ul>
   );
 }

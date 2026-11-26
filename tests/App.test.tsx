@@ -5,30 +5,39 @@ import App from "../src/App";
 afterEach(() => vi.unstubAllGlobals());
 
 function renderAt(pathname: string) {
-  vi.stubGlobal("window", { location: { pathname } });
+  vi.stubGlobal("window", {
+    location: { pathname },
+    addEventListener: vi.fn(),
+    removeEventListener: vi.fn(),
+  });
 
   return renderToStaticMarkup(<App />);
 }
 
-test("the home page exposes one main landmark, the résumé, and a contact action", () => {
+test("the home page exposes one main landmark and preserves its original introduction", () => {
   const markup = renderAt("/");
 
   expect(markup.match(/<main(?:\s|>)/g)).toHaveLength(1);
+  expect(markup.match(/<aside(?:\s|>)/g)).toHaveLength(1);
+  expect(markup).toMatch(/<h1[^>]*>Hi, I&#x27;m <span[^>]*>Mark Funa<\/span><\/h1>/);
   expect(markup).toContain('href="#main-content"');
   expect(markup).toContain('href="/MarkFunaResume.pdf"');
-  expect(markup).toContain('href="mailto:');
+  expect(markup).toContain("Download CV");
+  expect(markup).not.toMatch(/<img\b[^>]*alt="Mark Funa"/i);
   expect(markup).not.toContain('href="#"');
 });
 
-test("the text-only introduction links to each featured project", () => {
+test("one mobile menu gives access to section anchors and contact links", () => {
   const markup = renderAt("/");
+  const mobileMenu = markup.match(/<nav[^>]*id="mobile-navigation"[^>]*>[\s\S]*?<\/nav>/)?.[0];
 
-  expect(markup).toMatch(/<h1[^>]*>Mark Funa<\/h1>/);
-  expect(markup).not.toMatch(/<img\b[^>]*alt="Mark Funa"/i);
-  for (const id of ["project-salapi", "project-laundry-pos", "project-hotel-reservation"]) {
-    expect(markup).toContain(`href="#${id}"`);
-    expect(markup).toContain(`id="${id}"`);
-  }
+  expect(markup.match(/aria-controls="mobile-navigation"/g)).toHaveLength(1);
+  expect(markup).toContain('aria-label="Open menu"');
+  expect(mobileMenu).toContain("hidden");
+  expect(mobileMenu).toContain('href="#projects"');
+  expect(mobileMenu).toContain('href="mailto:');
+  expect(mobileMenu).toContain('href="https://www.linkedin.com/');
+  expect(mobileMenu).toContain('href="https://github.com/');
 });
 
 test("the legacy about path still renders the portfolio and its experience section", () => {

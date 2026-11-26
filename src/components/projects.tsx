@@ -1,91 +1,59 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
-import { ArrowRight, ArrowUpRight, ChevronDown, X } from "lucide-react";
-import { featuredProjects, otherProjects, type FeaturedProject } from "./projectData";
+import useEmblaCarousel from "embla-carousel-react";
+import { ArrowLeft, ArrowRight, ArrowUpRight, X } from "lucide-react";
+import { projects, type Project, type ProjectCategory, type ProjectImage } from "./projectData";
 import "./projects.css";
 
-function SourceLink({ source, title }: { source: string; title: string }) {
-  return (
-    <a
-      className="project-link project-source-link"
-      href={source}
-      aria-label={`Source code for ${title} on GitHub`}
-    >
-      Source code <ArrowUpRight aria-hidden="true" size={16} />
-    </a>
-  );
-}
+const categories = [
+  { id: "client", label: "Client Work" },
+  { id: "personal", label: "Personal Projects" },
+] as const;
 
-function ProjectArtwork({
-  artwork,
-  decorative = false,
-}: {
-  artwork: FeaturedProject["artwork"];
-  decorative?: boolean;
-}) {
+function ProjectArtwork({ image, decorative = false }: { image: ProjectImage; decorative?: boolean }) {
   return (
     <img
-      src={`${import.meta.env.BASE_URL}projects/${artwork.file}`}
-      alt={decorative ? "" : artwork.alt}
-      width={artwork.width}
-      height={artwork.height}
+      src={`${import.meta.env.BASE_URL}projects/${image.file}`}
+      alt={decorative ? "" : image.alt}
+      width={image.width}
+      height={image.height}
       loading="lazy"
       decoding="async"
     />
   );
 }
 
-function ArtworkFigure({ artwork }: { artwork: FeaturedProject["artwork"] }) {
+function ProjectTags({ tags }: { tags: string[] }) {
   return (
-    <figure className="project-dialog-artwork">
-      <ProjectArtwork artwork={artwork} />
-      <figcaption>{artwork.caption}</figcaption>
-    </figure>
+    <ul className="project-tags" role="list" aria-label="Project technologies">
+      {tags.map((tag) => <li key={tag}>{tag}</li>)}
+    </ul>
   );
 }
 
-function FeaturedProjectCard({ project }: { project: FeaturedProject }) {
+function ProjectCard({ project, active }: { project: Project; active: boolean }) {
   const dialogTitle = useRef<HTMLHeadingElement>(null);
-  const {
-    additionalArtwork,
-    artwork,
-    category,
-    contribution,
-    decisions,
-    id,
-    problem,
-    result,
-    source,
-    summary,
-    tags,
-    title,
-    year,
-  } = project;
-  const meta = year ? `${category} · ${year}` : category;
+  const [imageIndex, setImageIndex] = useState(0);
+  const { id, images, source, summary, tags, title } = project;
+  const image = images[imageIndex];
+
+  function changeImage(step: number) {
+    setImageIndex((index) => (index + step + images.length) % images.length);
+  }
 
   return (
-    <Dialog.Root>
-      <article className="project-card" id={`project-${id}`} tabIndex={-1} aria-labelledby={`project-${id}-title`}>
-        <div className="project-artwork">
-          <ProjectArtwork artwork={artwork} decorative />
-          {artwork.label && <span className="project-artwork-label">{artwork.label}</span>}
+    <Dialog.Root onOpenChange={(open) => { if (open) setImageIndex(0); }}>
+      <article className="project-card" aria-labelledby={`project-${id}-title`} aria-hidden={!active || undefined} inert={!active}>
+        <div className="project-cover">
+          <ProjectArtwork image={images[0]} decorative />
         </div>
-        <div className="project-card-body">
-          <p className="project-meta">{meta}</p>
-          <h3 id={`project-${id}-title`}>{title}</h3>
-          <p className="project-summary">{summary}</p>
-          <ul className="project-tags" role="list" aria-label="Project technologies and features">
-            {tags.map((tag) => <li key={tag}>{tag}</li>)}
-          </ul>
-          <div className="project-actions">
-            <Dialog.Trigger asChild>
-              <button type="button" className="project-link" aria-label={`Read case study for ${title}`}>
-                Read case study <ArrowRight aria-hidden="true" size={17} />
-              </button>
-            </Dialog.Trigger>
-            {source && <SourceLink source={source} title={title} />}
-          </div>
-        </div>
+        <h3 id={`project-${id}-title`}>{title}</h3>
+        <p className="project-card-summary">{summary}</p>
+        <ProjectTags tags={tags} />
+        <span className="project-card-action" aria-hidden="true">View Project <ArrowRight size={16} /></span>
+        <Dialog.Trigger asChild>
+          <button type="button" className="project-card-trigger" aria-label={`View Project: ${title}`} />
+        </Dialog.Trigger>
       </article>
 
       <Dialog.Portal>
@@ -99,27 +67,22 @@ function FeaturedProjectCard({ project }: { project: FeaturedProject }) {
           }}
         >
           <header className="project-dialog-header">
-            <div>
-              <p className="project-meta">{meta}</p>
-              <Dialog.Title ref={dialogTitle} tabIndex={-1} className="project-dialog-title">
-                {title}
-              </Dialog.Title>
-            </div>
-            <Dialog.Close type="button" className="project-dialog-close" aria-label="Close case study">
-              <X aria-hidden="true" size={23} />
+            <Dialog.Title className="project-dialog-title" ref={dialogTitle} tabIndex={-1}>
+              {title}
+            </Dialog.Title>
+            <Dialog.Close type="button" className="project-icon-button" aria-label="Close project details">
+              <X aria-hidden="true" size={21} />
             </Dialog.Close>
           </header>
 
           <div
             className="project-dialog-body"
             role="region"
-            aria-label="Case study details"
+            aria-label="Project details"
             tabIndex={0}
             onFocus={(event) => {
               const control = event.target;
               if (control === event.currentTarget) return;
-
-              // Radix can wrap focus without scrolling the focused control into view.
               requestAnimationFrame(() => {
                 if (document.activeElement === control) {
                   control.scrollIntoView({ block: "nearest", inline: "nearest", behavior: "instant" });
@@ -127,35 +90,27 @@ function FeaturedProjectCard({ project }: { project: FeaturedProject }) {
               });
             }}
           >
+            <figure className="project-gallery-image">
+              <ProjectArtwork image={image} />
+              {image.caption && <figcaption>{image.caption}</figcaption>}
+            </figure>
+            {images.length > 1 && (
+              <div className="project-gallery-controls">
+                <button type="button" className="project-icon-button" aria-label="Previous screenshot" onClick={() => changeImage(-1)}>
+                  <ArrowLeft size={17} aria-hidden="true" />
+                </button>
+                <span aria-live="polite">Image {imageIndex + 1} of {images.length}</span>
+                <button type="button" className="project-icon-button" aria-label="Next screenshot" onClick={() => changeImage(1)}>
+                  <ArrowRight size={17} aria-hidden="true" />
+                </button>
+              </div>
+            )}
             <Dialog.Description className="project-dialog-summary">{summary}</Dialog.Description>
-            <div className="project-detail-grid">
-              <section>
-                <h3>Problem</h3>
-                <p>{problem}</p>
-              </section>
-              <section>
-                <h3>My contribution</h3>
-                <p>{contribution}</p>
-              </section>
-              <section>
-                <h3>Technical decisions</h3>
-                <p>{decisions}</p>
-              </section>
-              <section>
-                <h3>Result</h3>
-                <p>{result}</p>
-              </section>
-            </div>
-            {source && <SourceLink source={source} title={title} />}
-            <ArtworkFigure artwork={artwork} />
-            {additionalArtwork && (
-              <details className="project-gallery-details">
-                <summary>
-                  <span>View another screen</span>
-                  <ChevronDown aria-hidden="true" size={18} />
-                </summary>
-                <ArtworkFigure artwork={additionalArtwork} />
-              </details>
+            <ProjectTags tags={tags} />
+            {source && (
+              <a href={source} className="project-source-link">
+                Source code <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
             )}
           </div>
         </Dialog.Content>
@@ -164,29 +119,67 @@ function FeaturedProjectCard({ project }: { project: FeaturedProject }) {
   );
 }
 
+function ProjectsCarousel({ items }: { items: Project[] }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [viewportRef, carousel] = useEmblaCarousel({
+    loop: true,
+    breakpoints: { "(prefers-reduced-motion: reduce)": { duration: 0 } },
+  });
+
+  useEffect(() => {
+    if (!carousel) return;
+    const onSelect = () => setActiveIndex(carousel.selectedScrollSnap());
+    carousel.on("select", onSelect).on("reInit", onSelect);
+    return () => { carousel.off("select", onSelect).off("reInit", onSelect); };
+  }, [carousel]);
+
+  return (
+    <div className="project-carousel" role="region" aria-label="Projects" aria-roledescription="carousel">
+      <div className="project-viewport" ref={viewportRef}>
+        <div className="project-slides">
+          {items.map((project, index) => (
+            <div className="project-slide" key={project.id}>
+              <ProjectCard project={project} active={index === activeIndex} />
+            </div>
+          ))}
+        </div>
+      </div>
+      <button type="button" className="project-icon-button project-arrow project-arrow--previous" aria-label="Previous project" onClick={() => carousel?.scrollPrev()}>
+        <ArrowLeft size={17} aria-hidden="true" />
+      </button>
+      <button type="button" className="project-icon-button project-arrow project-arrow--next" aria-label="Next project" onClick={() => carousel?.scrollNext()}>
+        <ArrowRight size={17} aria-hidden="true" />
+      </button>
+      <div className="project-pagination" role="group" aria-label="Choose a project">
+        {items.map((project, index) => (
+          <button
+            type="button"
+            key={project.id}
+            aria-label={`Show ${project.title}`}
+            aria-pressed={index === activeIndex}
+            onClick={() => carousel?.scrollTo(index)}
+          >
+            <span aria-hidden="true" />
+          </button>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 export default function Projects() {
+  const [category, setCategory] = useState<ProjectCategory>("client");
+
   return (
     <div className="portfolio-projects">
-      <div className="projects-grid">
-        {featuredProjects.map((project) => <FeaturedProjectCard key={project.id} project={project} />)}
+      <div className="project-category" role="group" aria-label="Project category">
+        {categories.map(({ id, label }) => (
+          <button type="button" key={id} aria-pressed={category === id} onClick={() => setCategory(id)}>
+            {label}
+          </button>
+        ))}
       </div>
-      <details className="project-archive">
-        <summary>
-          <span>More projects</span>
-          <ChevronDown aria-hidden="true" size={20} />
-        </summary>
-        <ul className="project-archive-list" role="list">
-          {otherProjects.map(({ source, summary, title }) => (
-            <li key={title}>
-              <div>
-                <h3>{title}</h3>
-                <p>{summary}</p>
-              </div>
-              {source && <SourceLink source={source} title={title} />}
-            </li>
-          ))}
-        </ul>
-      </details>
+      <ProjectsCarousel key={category} items={projects.filter((project) => project.category === category)} />
     </div>
   );
 }

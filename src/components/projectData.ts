@@ -1,144 +1,141 @@
-type ProjectArtwork = {
+export type ProjectImage = {
   file: string;
   alt: string;
-  caption: string;
   width: number;
   height: number;
-  label?: string;
+  caption?: string;
 };
 
-export type FeaturedProject = {
+export type ProjectCategory = "client" | "personal";
+
+export type Project = {
   id: string;
   title: string;
-  category: string;
-  year?: number;
+  category: ProjectCategory;
   summary: string;
   tags: string[];
-  artwork: ProjectArtwork;
-  additionalArtwork?: ProjectArtwork;
-  problem: string;
-  contribution: string;
-  decisions: string;
-  result: string;
+  images: [ProjectImage, ...ProjectImage[]];
   source?: string;
 };
 
-export const featuredProjects: FeaturedProject[] = [
-  {
-    id: "salapi",
-    title: "Salapi",
-    category: "Personal project",
-    year: 2026,
-    summary: "Offline budgeting with an Accounts view modeled on familiar Philippine payment cards.",
-    tags: ["React", "SQLite WASM", "Offline access"],
-    artwork: {
-      file: "salapi.webp",
-      alt: "Illustration of five color-coded payment cards and a separate cash account, each with its balance shown below",
-      caption: "Illustrative Accounts view with sample balances.",
-      width: 960,
-      height: 640,
-      label: "Illustration",
-    },
-    problem:
-      "A budget should be accessible when a connection drops. The Accounts view also needed a clear way to distinguish bank accounts from cash at a glance.",
-    contribution:
-      "I built the offline budgeting app and designed its Accounts view. The interface pairs issuer-specific landscape cards with a separate design for Cash.",
-    decisions:
-      "Salapi stores budget data on the device using SQLite compiled to WebAssembly and the browser’s Origin Private File System. The balance sits below each card so it stays in a consistent place across account designs.",
-    result:
-      "The Accounts view shows a distinct face and readable balance for each account. The budget is usable without an internet connection.",
-  },
-  {
-    id: "laundry-pos",
-    title: "Laundry POS & Inventory",
-    category: "Client project",
-    year: 2026,
-    summary: "Digital order intake, payments, and daily close for a local laundry shop.",
-    tags: ["React", "Supabase", "PostgreSQL"],
-    artwork: {
-      file: "laundry-pos.webp",
-      alt: "Laundry POS orders screen showing sample orders, payment status, and staff actions",
-      caption: "Orders screen with synthetic shop data.",
-      width: 1110,
-      height: 740,
-    },
-    additionalArtwork: {
-      file: "laundry-order-detail.webp",
-      alt: "Synthetic laundry order details with an unpaid balance and payment options",
-      caption: "Order and payment details with synthetic shop data.",
-      width: 420,
-      height: 598,
-    },
-    problem:
-      "A local laundry shop relied on handwritten orders. Staff needed a shared record they could consult when accepting orders, collecting payments, and handing back laundry.",
-    contribution:
-      "I built a React and Supabase point-of-sale system with order intake, printable claim stubs, payment records, and reports for the manager.",
-    decisions:
-      "I separated cashier and manager permissions, blocked order release until payment was recorded, and designed checkout retries to avoid duplicate orders and payments.",
-    result:
-      "Staff can look up an order by claim number and see its status and payment. Managers can reconcile daily collections and export sales records to Excel.",
-    source: "https://github.com/solorankYT/laundry-pos",
-  },
+export const projects: Project[] = [
   {
     id: "hotel-reservation",
-    title: "Hotel Reservation & Billing",
-    category: "Capstone project",
-    summary: "Guest reservations and front-desk billing in one system.",
-    tags: ["Laravel 12", "PHP", "JavaScript"],
-    artwork: {
-      file: "hotel.webp",
-      alt: "Hotel booking calendar with check-in, check-out, guest count, and availability controls",
-      caption: "Guest-facing availability calendar.",
-      width: 960,
-      height: 640,
-    },
-    additionalArtwork: {
-      file: "hotel-home.webp",
-      alt: "Guest-facing hotel website landing screen",
-      caption: "Guest-facing homepage.",
-      width: 1280,
-      height: 628,
-    },
-    problem:
-      "A hotel needed to coordinate online reservations and walk-ins with room availability, payment verification, and front-desk checkout.",
-    contribution:
-      "I helped build a capstone application with guest room search, bookings, and a front-desk workflow for reservations, payments, and checkout.",
-    decisions:
-      "Laravel APIs connect the guest and staff workflows through a booking reference. A booking service enforces cancellation timing and updates room availability when a reservation is cancelled.",
-    result:
-      "Guests can check room availability and manage a booking. Staff can look up reservations, track payments, and run reports on occupancy and revenue.",
+    title: "Hotel Reservation and Billing System",
+    category: "client",
+    summary:
+      "A Laravel capstone project that connects online reservations with front-desk operations. Guests can check room availability and manage bookings. Staff can look up reservations, record payments, and run occupancy and revenue reports.",
+    tags: ["Laravel 12", "HTML", "JavaScript", "API", "CSS"],
+    images: [
+      {
+        file: "hotel-home.webp",
+        alt: "Guest-facing hotel website landing screen",
+        width: 1280,
+        height: 628,
+        caption: "Guest-facing homepage.",
+      },
+      {
+        file: "hotel.webp",
+        alt: "Hotel booking calendar with check-in, check-out, guest count, and availability controls",
+        width: 960,
+        height: 640,
+        caption: "Guest-facing availability calendar.",
+      },
+    ],
     source: "https://github.com/solorankYT/HRBS",
   },
-];
-
-type ArchivedProject = {
-  title: string;
-  summary: string;
-  source?: string;
-};
-
-export const otherProjects: ArchivedProject[] = [
   {
-    title: "Fresh Connection",
-    summary: "Produce storefront and inventory dashboard with order tracking and sales reports.",
+    id: "fresh-connection",
+    title: "Fresh Connection – E-Commerce & Inventory Management System",
+    category: "client",
+    summary:
+      "A customer storefront and inventory system for a fresh produce business. The application combines product and order management, sales reports, promotions, and a role-based administrative dashboard.",
+    tags: ["Laravel 12", "React", "MySQL", "Inertia.js", "Tailwind CSS", "JavaScript", "REST API"],
+    images: [
+      {
+        file: "fresh-connection.webp",
+        alt: "Fresh Connection storefront for fruit and vegetable products",
+        width: 1076,
+        height: 619,
+      },
+      {
+        file: "fresh-product-form.webp",
+        alt: "Fresh Connection product entry form",
+        width: 398,
+        height: 592,
+      },
+    ],
   },
   {
+    id: "barangay-ims",
     title: "Barangay Information Management System",
-    summary: "Resident records, document issuance, and service request tracking for a local government office.",
+    category: "client",
+    summary:
+      "A local government records system with resident profiles, document issuance, and service request tracking. Staff can view and manage these records from an administrative dashboard.",
+    tags: ["Laravel 12", "React", "Inertia.js", "CSS"],
+    images: [
+      {
+        file: "barangay.webp",
+        alt: "Barangay Information Management System home page",
+        width: 1280,
+        height: 646,
+      },
+      {
+        file: "barangay-map.webp",
+        alt: "Evacuation map in the Barangay Information Management System",
+        width: 1180,
+        height: 564,
+      },
+    ],
   },
   {
+    id: "focusly",
     title: "Focusly",
-    summary: "Task planning with Kanban boards, Pomodoro sessions, and productivity tracking.",
+    category: "personal",
+    summary:
+      "A productivity app with Kanban boards, Pomodoro focus sessions, and progress tracking.",
+    tags: ["Laravel 12", "React", "Inertia.js", "MySQL", "shadcn/ui"],
+    images: [
+      {
+        file: "focusly.webp",
+        alt: "Focusly task management interface",
+        width: 1280,
+        height: 587,
+      },
+    ],
     source: "https://github.com/solorankYT/taskmanagement",
   },
   {
-    title: "UniTrack",
-    summary: "School uniform and book storefront with checkout and stock tracking.",
+    id: "unitrack",
+    title: "Unitrack",
+    category: "personal",
+    summary:
+      "A school uniform and book storefront with multi-step checkout and an inventory dashboard for tracking stock.",
+    tags: ["React", "Node.js", "Express", "MySQL", "Tailwind CSS"],
+    images: [
+      {
+        file: "unitrack.webp",
+        alt: "Unitrack online storefront",
+        width: 601,
+        height: 330,
+      },
+    ],
     source: "https://github.com/solorankYT/unitrackk",
   },
   {
+    id: "ulam-generator",
     title: "Ulam Generator",
-    summary: "Meal suggestions based on the user’s preferences.",
+    category: "personal",
+    summary: "A meal suggestion app that recommends dishes based on the user’s preferences.",
+    tags: ["Next.js", "Firebase", "shadcn/ui"],
+    images: [
+      {
+        file: "ulam-generator.webp",
+        alt: "Ulam Generator meal suggestion interface",
+        width: 947,
+        height: 529,
+      },
+    ],
     source: "https://github.com/solorankYT/ulamgenerator",
   },
 ];
