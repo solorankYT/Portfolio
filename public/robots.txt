@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-seven-teal-71.vercel.app/sitemap.xml

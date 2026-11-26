@@ -1,115 +1,71 @@
-import SkillsCarousel from "./components/skillsCarousel";
-import Projects from "./components/projects";
-import { CiLocationOn } from "react-icons/ci";
-import GitHubContribution from "./components/githubContribution";
-import ScrollSection from "./components/ScrollSection";
-import Certificate from "./components/certificate";
+import { ArrowUpRight, Download, Mail } from "lucide-react";
 import About from "./About";
-import SideNav from "./components/navBar";
+import Certificate from "./components/certificate";
+import GitHubProfile from "./components/githubContribution";
+import HeroSection from "./components/heroSection";
+import Projects from "./components/projects";
+import Skills from "./components/skillsCarousel";
 
 export default function Home() {
   return (
-    <div className="bg-gray-900 dark:bg-gray-950 min-h-screen flex flex-col">
+    <>
+      <main id="main-content" tabIndex={-1}>
+        <HeroSection />
 
-      <SideNav />
+        <section className="site-container site-section work-section" id="projects" tabIndex={-1} aria-labelledby="work-title">
+          <div className="section-heading">
+            <h2 id="work-title">Selected work</h2>
+          </div>
+          <Projects />
+        </section>
 
-      <div className="md:ml-52">
+        <section className="site-container site-section experience-section" id="experience" tabIndex={-1} aria-labelledby="experience-title">
+          <div className="section-heading">
+            <h2 id="experience-title">Experience</h2>
+            <a className="section-link" href="/MarkFunaResume.pdf" download>
+              <Download size={17} aria-hidden="true" /> Download résumé
+            </a>
+          </div>
+          <About />
+        </section>
 
-        <ScrollSection>
-          <section id="home">
-            <main className="container max-w-3xl mx-auto mt-20 md:mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg border-b-0">
-              <p className="text-xs font-semibold tracking-[0.2em] uppercase text-yellow-500 mb-3">
-                Software Engineer
-                <br />
-                <span className="text-gray-300">specializing in full-stack development</span>
-              </p>
-              <h1 className="text-4xl font-extrabold text-white mb-3">
-                Hi, I'm <span className="text-yellow-400">Mark Funa</span>
-              </h1>
-              <h3 className="flex items-center text-sm text-gray-500 mb-5">
-                <CiLocationOn className="mr-1.5" />
-                Quezon City, Philippines
-              </h3>
+        <section className="site-container site-section" id="skills" tabIndex={-1} aria-labelledby="skills-title">
+          <div className="section-heading">
+            <h2 id="skills-title">Technical skills</h2>
+          </div>
+          <Skills />
+        </section>
 
-              <p className="text-gray-400 text-base leading-relaxed mb-6">
-                I've built 5+ full-stack applications, including three developed as
-                undergraduate capstone projects in partnership with real small businesses —
-                a hotel booking and billing platform, an e-commerce and inventory system,
-                and a local government records system.{" "}
-                <span className="text-gray-200 font-medium">
-                  Day job is enterprise support — side projects are where I build.
-                </span>
-              </p>
+        <section className="site-container site-section" id="certificates" tabIndex={-1} aria-labelledby="certificates-title">
+          <div className="section-heading">
+            <h2 id="certificates-title">Certifications</h2>
+          </div>
+          <Certificate />
+        </section>
 
-              <div className="flex items-center gap-3">
-                <a
-                  href="./MarkFunaResume.pdf"
-                  download
-                  className="inline-flex items-center gap-2 px-5 py-2.5
-                    text-sm font-semibold text-gray-900 bg-yellow-400
-                    rounded-lg hover:bg-yellow-300 transition-colors duration-200"
-                >
-                  Download CV
-                </a>
+        <section className="site-container contact-section" id="contact" tabIndex={-1} aria-labelledby="contact-title">
+          <div className="contact-panel">
+            <div>
+              <h2 id="contact-title">Contact</h2>
+              <p>Get in touch about a role or a project.</p>
+            </div>
+            <div className="contact-actions">
+              <a href="mailto:markfuna6@gmail.com" className="site-button site-button--accent">
+                <Mail size={19} aria-hidden="true" /> Email me
+              </a>
+              <a className="contact-link" href="https://www.linkedin.com/in/markfuna/">
+                LinkedIn <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+              <GitHubProfile />
+            </div>
+          </div>
+        </section>
+      </main>
 
-                <a
-                  href="#projects"
-                  className="inline-flex items-center gap-2 px-5 py-2.5
-                    text-sm font-semibold text-gray-200 border border-gray-600
-                    rounded-lg hover:border-gray-400 hover:text-white transition-colors duration-200"
-                >
-                  View Projects
-                </a>
-              </div>
-            </main>
-          </section>
-        </ScrollSection>
-
-        <ScrollSection>
-          <section id="skills" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-bold text-white mb-6 text-center">Technical Skills</h2>
-            <SkillsCarousel />
-          </section>
-        </ScrollSection>
-
-        <ScrollSection>
-          <section id="projects" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-bold text-white mb-2 text-center">Projects</h2>
-            <p className="text-gray-500 text-sm text-center mb-6">
-              Client projects were developed as undergraduate capstone work, built and deployed for real businesses.
-            </p>
-            <Projects />
-          </section>
-        </ScrollSection>
-
-        <ScrollSection>
-          <section id="experience" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-200 mb-6 text-center">Experience</h2>
-            <About />
-          </section>
-        </ScrollSection>
-
-        <ScrollSection>
-          <section id="certificates" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-bold text-white mb-6 text-center">Certificates</h2>
-            <Certificate />
-          </section>
-        </ScrollSection>
-
-        <ScrollSection>
-          <section id="contributions" className="container max-w-3xl mx-auto mt-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-bold text-gray-200 mb-6 text-center">GitHub Contributions</h2>
-            <GitHubContribution />
-          </section>
-        </ScrollSection>
-
-        <footer className="container max-w-3xl mx-auto mt-10 mb-10 p-8 bg-gray-800 border border-gray-700 rounded-xl shadow-lg">
-          <p className="text-gray-400 text-center">
-            © {new Date().getFullYear()} Mark Funa. All rights reserved.
-          </p>
-        </footer>
-
-      </div>
-    </div>
+      <footer className="site-container site-footer">
+        <p>© {new Date().getFullYear()} Mark Funa</p>
+        <a href="#home">Back to top <span aria-hidden="true">↑</span></a>
+      </footer>
+    </>
   );
 }

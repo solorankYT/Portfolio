@@ -1,106 +1,50 @@
-import { useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Award, ExternalLink, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowUpRight, Award } from "lucide-react";
+import "../credentials.css";
 
 const certificates = [
   {
-    title: "Oracle Database 19c: SQL Associate Certified",
-    issuer: "Oracle",
-    year: "2026",
-    link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F48C08D594ADA2515717124E534D1E640D674F5F6A57EE93955B839A5237AD60",
+    title: "Oracle Database SQL Certified Associate",
+    badgeUrl:
+      "https://catalog-education.oracle.com/ords/certview/sharebadge?id=F48C08D594ADA2515717124E534D1E640D674F5F6A57EE93955B839A5237AD60",
   },
   {
-    //
-    title: "Oracle Database 19c: PL/SQL Professional Certified",
-    issuer: "Oracle",
-    year: "2026",
-    link: "https://catalog-education.oracle.com/ords/certview/sharebadge?id=5B4DD06F9F1FAC6E2EBCF934EF539793A149FD7BD68CCDCE8729DA9C29614CCD",
+    title: "Oracle Database PL/SQL Certified Professional",
+    badgeUrl:
+      "https://catalog-education.oracle.com/ords/certview/sharebadge?id=5B4DD06F9F1FAC6E2EBCF934EF539793A149FD7BD68CCDCE8729DA9C29614CCD",
   },
   {
-    title: "Unix and Linux Essentials",
-    issuer: "Oracle",
-    year: "2026",
-    link: "https://your-certificate-link.com",
+    title: "Oracle Cloud Infrastructure Foundations Certified Associate",
   },
   {
-    title: "Oracle Cloud Infrastructure (OCI) Foundations 2026 Certified Associate",
-    issuer: "Oracle",
-    year: "2026",
-    link: "https://your-certificate-link.com",
-  },
-  {
-    title: "Oracle Cloud Infrastructure AI Foundations 2026 Certified Associate",
-    issuer: "Oracle",
-    year: "2026",
-    link: "https://your-certificate-link.com",
+    title: "Oracle Cloud Infrastructure AI Foundations Certified Associate",
   },
 ];
 
 export default function Certificate() {
-  const [expanded, setExpanded] = useState(false);
-
-  const visibleCertificates = expanded
-    ? certificates
-    : certificates.slice(0, 4);
-
   return (
-    <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {visibleCertificates.map((cert, index) => (
-          <a
-            key={index}
-            href={cert.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group flex flex-col gap-3 rounded-xl border border-gray-700 bg-gray-900 p-4 transition-all duration-300 hover:-translate-y-1 hover:border-yellow-500/50 hover:shadow-lg hover:shadow-yellow-500/10"
-          >
-            <div className="flex items-start justify-between gap-3">
-              <div className="flex items-start gap-2">
-                <Award className="mt-0.5 h-4 w-4 shrink-0 text-yellow-400" />
-                <p className="text-sm font-medium leading-snug text-white">
-                  {cert.title}
-                </p>
-              </div>
-
-              <ExternalLink className="h-4 w-4 shrink-0 text-gray-500 transition-colors group-hover:text-yellow-400" />
-            </div>
-
-            <div className="flex items-center justify-between pl-6">
-              <span className="truncate text-xs text-gray-500">
-                {cert.issuer}
-              </span>
-
-              <Badge
-                variant="outline"
-                className="border-gray-700 px-2 py-0 text-[10px] text-gray-400"
+    <ul className="credential-list" role="list">
+      {certificates.map(({ title, badgeUrl }) => (
+        <li key={title} className="credential-card">
+          <span className="credential-icon" aria-hidden="true">
+            <Award size={21} strokeWidth={1.6} />
+          </span>
+          <div className="credential-body">
+            <h3>{title}</h3>
+            <p className="credential-issuer">
+              Oracle · <time dateTime="2026">2026</time>
+            </p>
+            {badgeUrl && (
+              <a
+                className="credential-link"
+                href={badgeUrl}
+                aria-label={`View badge for ${title}`}
               >
-                {cert.year}
-              </Badge>
-            </div>
-          </a>
-        ))}
-      </div>
-
-      {certificates.length > 4 && (
-        <div className="mt-8 flex justify-center">
-          <button
-            onClick={() => setExpanded(!expanded)}
-            className="inline-flex items-center gap-2 rounded-full border border-gray-700 px-4 py-2 text-sm font-medium text-gray-300 transition-all duration-300 hover:border-yellow-500 hover:text-yellow-400"
-          >
-            {expanded ? (
-              <>
-                <ChevronUp className="h-4 w-4" />
-                Show Less
-              </>
-            ) : (
-              <>
-                <ChevronDown className="h-4 w-4" />
-                View More
-              </>
+                View badge <ArrowUpRight size={15} aria-hidden="true" />
+              </a>
             )}
-          </button>
-        </div>
-      )}
-    </div>
+          </div>
+        </li>
+      ))}
+    </ul>
   );
 }
