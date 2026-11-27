@@ -16,7 +16,7 @@ const fadeUp = (delay = 0) => ({
 export default function HeroSection() {
   return (
     <main className="container max-w-3xl mx-auto mt-20 p-8 bg-gray-800/80 backdrop-blur border border-gray-700 rounded-xl shadow-lg">
-      
+
       {/* Eyebrow */}
       <motion.p
         {...fadeUp(0)}
@@ -63,7 +63,7 @@ export default function HeroSection() {
         are easy to debug and extend.
       </motion.p>
 
-      
+
       <motion.div
         {...fadeUp(0.28)}
         className="flex flex-wrap gap-2 mb-8"

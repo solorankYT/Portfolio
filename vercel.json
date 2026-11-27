@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "routes": [
+    {
+      "src": "/about/?",
+      "status": 308,
+      "headers": { "Location": "/#experience" }
+    },
+    { "src": "/", "dest": "/index.html" },
+    { "handle": "filesystem" },
+    { "src": "/.*", "status": 404, "dest": "/index.html" }
+  ]
+}

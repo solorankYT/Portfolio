@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -7,12 +6,12 @@
 background-color: #1a202c;
 opacity: 1;
 background-image: radial-gradient(#748c1c 1.6px, #1a202c 1.6px);
-background-size: 32px 32px; 
+background-size: 32px 32px;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 80px; 
+  scroll-padding-top: 80px;
 }
 
 
@@ -178,5 +177,47 @@ html {
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #facc15;
+  outline-offset: 3px;
+}
+
+[tabindex="-1"]:focus {
+  outline: none;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 40;
+  top: 0.75rem;
+  left: 0.75rem;
+  border-radius: 0.5rem;
+  padding: 0.65rem 1rem;
+  color: #101828;
+  background: #facc15;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+@keyframes section-reveal {
+  from { transform: translateY(12px); }
+  to { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .section-reveal {
+    animation: section-reveal 0.45s ease-out;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }

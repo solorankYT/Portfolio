@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import { CgMail } from "react-icons/cg";
 
@@ -11,108 +11,109 @@ const sections = [
   { id: "contributions", label: "Contribution" },
 ];
 
-export default function SideNav() {
+const socialLinks = [
+  { label: "GitHub", href: "https://github.com/solorankYT", icon: FaGithub },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/markfuna/", icon: FaLinkedin },
+  { label: "Email", href: "mailto:markfuna6@gmail.com", icon: CgMail },
+];
+
+function SocialLinks({ mobile = false }: { mobile?: boolean }) {
+  return (
+    <ul className={mobile ? "mt-3 flex flex-wrap gap-x-5 border-t border-gray-700 pt-2" : "flex flex-col gap-4"}>
+      {socialLinks.map(({ href, label, icon: Icon }) => (
+        <li key={label}>
+          <a
+            href={href}
+            className={`flex items-center gap-2 text-gray-400 transition-colors hover:text-yellow-400 ${mobile ? "min-h-10 text-sm" : "text-xs"}`}
+          >
+            <Icon aria-hidden="true" className="text-sm" />
+            {label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+export default function SideNav({ isPortfolio }: { isPortfolio: boolean }) {
   const [active, setActive] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  const prefix = isPortfolio ? "" : "/";
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    if (!isPortfolio) return;
 
-    sections.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (!el) return;
+    const targets = sections.flatMap(({ id }) => {
+      const section = document.getElementById(id);
+      return section ? [section] : [];
+    }).reverse();
 
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActive(id);
-        },
-        { threshold: 0.4 }
-      );
-      observer.observe(el);
-      observers.push(observer);
-    });
+    const update = () => {
+      const atBottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+      const current = atBottom ? targets[0] : targets.find((section) => section.getBoundingClientRect().top <= 120);
+      setActive(current?.id ?? "home");
+    };
 
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
-  const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-    setMenuOpen(false);
-  };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [isPortfolio]);
 
   return (
     <>
-      <aside className="hidden md:flex fixed left-0 top-0 h-full w-52 flex-col justify-between py-10 px-6 z-30">
-
-        <div>
-   
-          <nav aria-label="Page sections">
-            <ul className="space-y-1">
-              {sections.map(({ id, label }) => {
-                const isActive = active === id;
-                return (
-                  <li key={id}>
-                    <button
-                      onClick={() => scrollTo(id)}
-                      className={`group flex items-center gap-3 w-full text-left py-2 text-sm font-medium transition-colors duration-200
-                        ${isActive ? "text-yellow-400" : "text-gray-500 hover:text-gray-200"}`}
-                    >
-                      <span
-                        className={`h-px transition-all duration-300
-                          ${isActive ? "w-8 bg-yellow-400" : "w-4 bg-gray-600 group-hover:w-6 group-hover:bg-gray-400"}`}
-                      />
-                      {label}
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </div>
-
-        {/* Social links */}
-        <ul className="flex flex-col gap-4 text-gray-500 text-lg">
-          <li>
-            <a
-              href="https://github.com/solorankYT"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub"
-              className="hover:text-yellow-400 transition-colors duration-200 flex items-center gap-2 text-sm"
-            >
-              <FaGithub /> <span className="text-xs">GitHub</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="https://www.linkedin.com/in/markfuna/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-              className="hover:text-yellow-400 transition-colors duration-200 flex items-center gap-2 text-sm"
-            >
-              <FaLinkedin /> <span className="text-xs">LinkedIn</span>
-            </a>
-          </li>
-          <li>
-            <a
-              href="mailto:markfuna6@gmail.com"
-              aria-label="Email"
-              className="hover:text-yellow-400 transition-colors duration-200 flex items-center gap-2 text-sm"
-            >
-              <CgMail className="text-base" /> <span className="text-xs">Email</span>
-            </a>
-          </li>
-        </ul>
+      <aside className="hidden md:flex fixed left-0 top-0 h-full w-52 flex-col justify-between gap-8 overflow-y-auto py-10 px-6 z-30">
+        <nav aria-label="Page sections">
+          <ul className="space-y-1">
+            {sections.map(({ id, label }) => {
+              const isActive = isPortfolio && active === id;
+              return (
+                <li key={id}>
+                  <a
+                    href={`${prefix}#${id}`}
+                    aria-current={isActive ? "location" : undefined}
+                    className={`group flex items-center gap-3 w-full text-left py-2 text-sm font-medium transition-colors duration-200
+                      ${isActive ? "text-yellow-400" : "text-gray-400 hover:text-gray-200"}`}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={`h-px transition-all duration-300
+                        ${isActive ? "w-8 bg-yellow-400" : "w-4 bg-gray-600 group-hover:w-6 group-hover:bg-gray-400"}`}
+                    />
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </nav>
+        <SocialLinks />
       </aside>
 
-      <header className="md:hidden fixed top-0 left-0 w-full z-30 bg-gray-900/90 backdrop-blur border-b border-gray-800 px-5 py-3 flex items-center justify-between">
-        <p className="text-white font-bold text-sm">Mark Funa</p>
+      <header
+        className="md:hidden fixed top-0 left-0 w-full z-30 bg-gray-900/95 backdrop-blur border-b border-gray-800 h-[52px] px-5 flex items-center justify-between"
+        onKeyDown={(event) => {
+          if (event.key === "Escape" && menuOpen) {
+            setMenuOpen(false);
+            menuButton.current?.focus();
+          }
+        }}
+      >
+        <a href={`${prefix}#home`} onClick={() => setMenuOpen(false)} className="text-white font-bold text-sm">
+          Mark Funa
+        </a>
         <button
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
+          ref={menuButton}
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-controls="mobile-navigation"
           aria-expanded={menuOpen}
-          className="text-gray-400 hover:text-white p-1"
+          className="grid h-11 w-11 -mr-2 place-items-center text-gray-400 hover:text-white"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             {menuOpen ? (
@@ -122,26 +123,34 @@ export default function SideNav() {
             )}
           </svg>
         </button>
-      </header>
 
-      {/* Mobile dropdown */}
-      {menuOpen && (
-        <div className="md:hidden fixed top-12 left-0 w-full z-20 bg-gray-900 border-b border-gray-800 px-5 py-4">
-          <ul className="space-y-3">
-            {sections.map(({ id, label }) => (
-              <li key={id}>
-                <button
-                  onClick={() => scrollTo(id)}
-                  className={`text-sm font-medium w-full text-left transition-colors duration-200
-                    ${active === id ? "text-yellow-400" : "text-gray-400 hover:text-white"}`}
-                >
-                  {label}
-                </button>
-              </li>
-            ))}
+        <nav
+          id="mobile-navigation"
+          aria-label="Page sections"
+          hidden={!menuOpen}
+          className="fixed top-[52px] left-0 w-full max-h-[calc(100dvh_-_52px)] overflow-y-auto bg-gray-900 border-b border-gray-800 px-5 py-3"
+        >
+          <ul>
+            {sections.map(({ id, label }) => {
+              const isActive = isPortfolio && active === id;
+              return (
+                <li key={id}>
+                  <a
+                    href={`${prefix}#${id}`}
+                    aria-current={isActive ? "location" : undefined}
+                    onClick={() => setMenuOpen(false)}
+                    className={`flex min-h-10 items-center text-sm font-medium transition-colors duration-200
+                      ${isActive ? "text-yellow-400" : "text-gray-400 hover:text-white"}`}
+                  >
+                    {label}
+                  </a>
+                </li>
+              );
+            })}
           </ul>
-        </div>
-      )}
+          <SocialLinks mobile />
+        </nav>
+      </header>
     </>
   );
 }

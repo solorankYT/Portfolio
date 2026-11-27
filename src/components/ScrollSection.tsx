@@ -1,33 +1,21 @@
-"use client";
-import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
-import { useInView } from "react-intersection-observer";
+import { useEffect, useRef, type ReactNode } from "react";
 
-export default function ScrollSection({ children }: { children: React.ReactNode }) {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
+export default function ScrollSection({ children }: { children: ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-    }
-  }, [controls, inView]);
+    const section = ref.current;
+    if (!section || typeof IntersectionObserver === "undefined" ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-  return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={{
-        hidden: { opacity: 0, y: 40 },
-        visible: {
-          opacity: 1,
-          y: 0,
-          transition: { duration: 0.6, ease: "easeOut" },
-        },
-      }}
-    >
-      {children}
-    </motion.div>
-  );
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      section.classList.add("section-reveal");
+      observer.disconnect();
+    });
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  return <div ref={ref}>{children}</div>;
 }

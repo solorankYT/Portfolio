@@ -1,74 +1,87 @@
-import { useEffect, useState } from 'react';
-import { ActivityCalendar } from 'react-activity-calendar';
-import type { ThemeInput } from 'react-activity-calendar';
+import { useEffect, useRef, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
+import type { Activity, ThemeInput } from "react-activity-calendar";
+import { getContributionDays } from "./githubContributionData";
 
-interface Contribution {
-  date: string;
-  count: number;
-  level: number;
-}
-
+const profileUrl = "https://github.com/solorankYT";
+const contributionsUrl = "https://github-contributions-api.jogruber.de/v4/SolorankYT";
 const greenTheme: ThemeInput = {
-  light: ['#ebedf0', '#9be9a8', '#40c463', '#30a14e', '#216e39'],
-  dark: ['#161b22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+  dark: ["#161b22", "#0e4429", "#006d32", "#26a641", "#39d353"],
 };
 
+type Calendar = typeof import("react-activity-calendar")["ActivityCalendar"];
+type CalendarState =
+  | { status: "loading" | "unavailable" }
+  | { status: "ready"; data: Activity[]; year: number; Calendar: Calendar };
 
-export default function SolorankContributions() {
-  const [data, setData] = useState<Contribution[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+export default function GitHubContribution() {
+  const section = useRef<HTMLDivElement>(null);
+  const [state, setState] = useState<CalendarState>({ status: "loading" });
 
   useEffect(() => {
-    async function fetchContributions() {
-      setLoading(true);
-      setError(null);
+    const element = section.current;
+    if (!element) return;
+
+    const controller = new AbortController();
+    const loadContributions = async () => {
       try {
-        const response = await fetch('https://github-contributions-api.jogruber.de/v4/SolorankYT');
-        if (!response.ok) throw new Error('Failed to fetch');
-        const json = await response.json();
+        const year = new Date().getFullYear();
+        const response = await fetch(`${contributionsUrl}?y=${year}`, { signal: controller.signal });
+        if (!response.ok) throw new Error("Contributions request failed");
 
-        const contributions2026 = (json.contributions as unknown[])
-          .filter(
-            (day: unknown): day is { date: string; count: number; level: number } =>
-              typeof day === 'object' &&
-              day !== null &&
-              'date' in day &&
-              typeof (day as Record<string, unknown>).date === 'string' &&
-              'count' in day &&
-              typeof (day as Record<string, unknown>).count === 'number' &&
-              'level' in day &&
-              typeof (day as Record<string, unknown>).level === 'number' &&
-              typeof (day as Record<string, unknown>).date === 'string' &&
-              typeof (day as Record<string, unknown>).date === 'string' &&
-              ((day as Record<string, unknown>).date as string).startsWith('2026-')
-          )
-          .map((day) => ({
-            date: day.date,
-            count: day.count,
-            level: day.level,
-          }));
+        const data = getContributionDays(await response.json(), year);
+        if (data.length === 0) throw new Error("No current-year contributions were returned");
 
-        setData(contributions2026);
-      } catch (e) {
-        setError('Failed to load contributions');
-        console.error(e);
-      } finally {
-        setLoading(false);
+        const { ActivityCalendar } = await import("react-activity-calendar");
+        if (!controller.signal.aborted) setState({ status: "ready", data, year, Calendar: ActivityCalendar });
+      } catch {
+        if (!controller.signal.aborted) setState({ status: "unavailable" });
       }
+    };
+
+    if (typeof IntersectionObserver === "undefined") {
+      void loadContributions();
+      return () => controller.abort();
     }
 
-    fetchContributions();
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry?.isIntersecting) return;
+      observer.disconnect();
+      void loadContributions();
+    }, { rootMargin: "240px" });
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+      controller.abort();
+    };
   }, []);
 
-  if (loading) return <p>Loading contributions...</p>;
-  if (error) return <p>{error}</p>;
-
   return (
-     
-      <div className="text-gray-100 bg-gray-900 p-6 rounded-lg shadow-lg overflow-x-auto custom-scroll">
-        <ActivityCalendar data={data} theme={greenTheme} />
-      </div>
-
+    <div ref={section} className="text-gray-300">
+      {state.status === "ready" ? (
+        <div
+          className="bg-gray-900 p-4 sm:p-6 rounded-lg shadow-lg overflow-x-auto custom-scroll text-gray-100"
+          role="region"
+          aria-label={`GitHub contributions for ${state.year}`}
+          tabIndex={0}
+        >
+          <state.Calendar data={state.data} theme={greenTheme} colorScheme="dark" />
+        </div>
+      ) : (
+        <p role="status">
+          {state.status === "loading" ? "Loading contributions…" : "The contribution calendar is temporarily unavailable."}
+        </p>
+      )}
+      <a
+        className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm text-yellow-400 underline underline-offset-4 hover:text-yellow-300"
+        href={profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        View GitHub profile
+        <ArrowUpRight size={16} aria-hidden="true" />
+      </a>
+    </div>
   );
 }

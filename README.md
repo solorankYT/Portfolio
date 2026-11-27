@@ -1,54 +1,33 @@
-# React + TypeScript + Vite
+# Mark Funa’s portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Mark Funa is a software engineer based in Quezon City, Philippines. This site brings together his full-stack projects, enterprise application support experience, certifications, and résumé. It uses React, TypeScript, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+The portfolio keeps its dark layout and yellow accents, with updated project details, mobile and keyboard navigation, and search metadata.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Portfolio](https://portfolio-seven-teal-71.vercel.app/) · [GitHub](https://github.com/solorankYT)
 
-## Expanding the ESLint configuration
+## Local development
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Use Node.js 22.13 or later in the 22.x series, or Node.js 24 and later, with npm.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```sh
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Checks and production build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```sh
+npm run lint
+npm test
+npm run build
+npm run preview
 ```
+
+The build outputs static files to `dist`. Vercel routing is configured in `vercel.json`. The `/about` URL redirects to the Experience section and unknown routes use the app’s 404 page.
+
+## Content and assets
+
+- Portfolio sections are composed in `src/Home.tsx`, with section components in `src/components`.
+- `public/MarkFunaResume.pdf` is the downloadable résumé. Use screenshots with demo data or approval for public display.
+- Search and sharing metadata live in `index.html`. When updating the production domain, update the canonical and Open Graph URLs there and the URLs in `public/robots.txt` and `public/sitemap.xml`.
