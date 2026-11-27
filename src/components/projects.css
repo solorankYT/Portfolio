@@ -315,8 +315,24 @@
   font-size: 0.8rem;
 }
 
-.project-gallery-image figcaption {
+.project-gallery-caption {
+  display: flex;
+  min-height: 2.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0 1rem;
   margin-top: 0.4rem;
+}
+
+.project-gallery-caption a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--project-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .project-gallery-controls {

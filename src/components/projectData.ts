@@ -138,4 +138,74 @@ export const projects: Project[] = [
     ],
     source: "https://github.com/solorankYT/ulamgenerator",
   },
+  {
+    id: "salapi",
+    title: "Salapi",
+    category: "personal",
+    summary:
+      "An offline budgeting app that stores data on the device. It tracks income, expenses, and transfers across bank accounts, e-wallets, and cash, with a calendar for upcoming bills.",
+    tags: ["React", "TypeScript", "SQLite WASM", "PWA"],
+    images: [
+      {
+        file: "salapi-accounts.webp",
+        alt: "Salapi Accounts screen with six demo account cards for banks, e-wallets, and cash",
+        width: 1130,
+        height: 998,
+        caption: "Account cards and balances from a demo wallet.",
+      },
+      {
+        file: "salapi-overview.webp",
+        alt: "Salapi mobile overview with a demo balance, upcoming bill, and recent activity",
+        width: 720,
+        height: 1566,
+        caption: "Mobile overview with sample balances and a bill reminder.",
+      },
+      {
+        file: "salapi-calendar.webp",
+        alt: "Salapi mobile calendar with sample bill dates and daily spending",
+        width: 720,
+        height: 1566,
+        caption: "Monthly calendar with sample bills and spending.",
+      },
+      {
+        file: "salapi-transfer.webp",
+        alt: "Salapi mobile transfer form with demo GCash and Cash accounts",
+        width: 720,
+        height: 1566,
+        caption: "Draft transfer between two demo accounts.",
+      },
+    ],
+  },
+  {
+    id: "laundry-pos",
+    title: "Laundry POS",
+    category: "personal",
+    summary:
+      "A point-of-sale app for laundry shops. Staff can create orders, print claim slips, record payments, and track pickups. Managers can review the day's order activity and collections.",
+    tags: ["React", "Supabase", "PostgreSQL"],
+    images: [
+      {
+        file: "laundry-orders.webp",
+        alt: "Laundry POS order queue with sample orders, statuses, and payment actions",
+        width: 1240,
+        height: 720,
+        caption: "Order queue with sample orders.",
+      },
+      {
+        file: "laundry-dashboard.webp",
+        alt: "Laundry POS manager dashboard showing cash and GCash collections and orders ready for pickup",
+        width: 1240,
+        height: 810,
+        caption: "Manager dashboard with sample daily collections and pickups.",
+      },
+      {
+        file: "laundry-payment.webp",
+        alt: "Laundry POS payment drawer for a sample order with Cash selected",
+        width: 420,
+        height: 571,
+        caption: "Recording a cash payment for a sample order.",
+      },
+    ],
+    source: "https://github.com/solorankYT/laundry-pos",
+  },
 ];

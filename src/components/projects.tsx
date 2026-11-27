@@ -10,10 +10,14 @@ const categories = [
   { id: "personal", label: "Personal Projects" },
 ] as const;
 
+function imageUrl(image: ProjectImage) {
+  return `${import.meta.env.BASE_URL}projects/${image.file}`;
+}
+
 function ProjectArtwork({ image, decorative = false }: { image: ProjectImage; decorative?: boolean }) {
   return (
     <img
-      src={`${import.meta.env.BASE_URL}projects/${image.file}`}
+      src={imageUrl(image)}
       alt={decorative ? "" : image.alt}
       width={image.width}
       height={image.height}
@@ -92,7 +96,13 @@ function ProjectCard({ project, active }: { project: Project; active: boolean })
           >
             <figure className="project-gallery-image">
               <ProjectArtwork image={image} />
-              {image.caption && <figcaption>{image.caption}</figcaption>}
+              <figcaption className="project-gallery-caption">
+                {image.caption && <span>{image.caption}</span>}
+                <a href={imageUrl(image)} target="_blank" rel="noopener noreferrer">
+                  View full-size screenshot <ArrowUpRight size={14} aria-hidden="true" />
+                  <span className="sr-only"> (opens in a new tab)</span>
+                </a>
+              </figcaption>
             </figure>
             {images.length > 1 && (
               <div className="project-gallery-controls">
