@@ -60,6 +60,12 @@ export default function GitHubContribution() {
   return (
     <div ref={section} className="text-gray-300">
       {state.status === "ready" ? (
+         <a
+        className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm text-yellow-400 underline underline-offset-4 hover:text-yellow-300"
+        href={profileUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <div
           className="bg-gray-900 p-4 sm:p-6 rounded-lg shadow-lg overflow-x-auto custom-scroll text-gray-100"
           role="region"
@@ -68,20 +74,12 @@ export default function GitHubContribution() {
         >
           <state.Calendar data={state.data} theme={greenTheme} colorScheme="dark" />
         </div>
+        </a>
       ) : (
         <p role="status">
           {state.status === "loading" ? "Loading contributions…" : "The contribution calendar is temporarily unavailable."}
         </p>
       )}
-      <a
-        className="mt-2 inline-flex min-h-11 items-center gap-1.5 text-sm text-yellow-400 underline underline-offset-4 hover:text-yellow-300"
-        href={profileUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View GitHub profile
-        <ArrowUpRight size={16} aria-hidden="true" />
-      </a>
     </div>
   );
 }

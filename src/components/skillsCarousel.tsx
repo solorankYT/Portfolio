@@ -53,19 +53,13 @@ const backendSkills: Skill[] = [
   { icon: <SiMysql />, name: "MySQL", color: "group-hover:text-blue-500", level: "core" },
   { icon: <SiExpress />, name: "Express.js", color: "group-hover:text-gray-300", level: "core" },
   { icon: <SiOracle />, name: "Oracle SQL", color: "group-hover:text-red-600", level: "familiar" },
-  { icon: <Database />, name: "PL/SQL", color: "group-hover:text-orange-400", level: "familiar" },
-  { icon: <SiFirebase />, name: "Firebase", color: "group-hover:text-yellow-400", level: "familiar" },
-  { icon: <SiSupabase />, name: "Supabase", color: "group-hover:text-blue-400", level: "familiar" },
 ];
 
 const devOpsSkills: Skill[] = [
-  { icon: <FaGitAlt />, name: "Git", color: "group-hover:text-orange-500", level: "core" },
   { icon: <FaGithub />, name: "GitHub", color: "group-hover:text-zinc-200", level: "core" },
   { icon: <FaDocker />, name: "Docker", color: "group-hover:text-blue-400", level: "familiar" },
   { icon: <FaLinux />, name: "Linux / Unix", color: "group-hover:text-yellow-300", level: "core" },
   { icon: <FaAws />, name: "AWS", color: "group-hover:text-orange-400", level: "familiar" },
-  { icon: <SiGithubactions />, name: "CI/CD", color: "group-hover:text-violet-400", level: "familiar" },
-  { icon: <Server />, name: "Hostinger", color: "group-hover:text-violet-500", level: "familiar" },
 ];
 
 
